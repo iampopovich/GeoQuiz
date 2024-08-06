@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GeoQuiz</string>
+    <string name="app_name">JGeoQuiz</string>
     <string name="button_true">TRUE</string>
     <string name="button_false">FALSE</string>
     <string name="button_next">NEXT</string>

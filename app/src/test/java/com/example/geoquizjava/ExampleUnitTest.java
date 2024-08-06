@@ -1,4 +1,4 @@
-package com.example.geoquiz;
+package com.example.geoquizjava;
 
 import org.junit.Test;
 

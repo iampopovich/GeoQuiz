@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.geoquiz'
+    namespace 'com.example.geoquizjava'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.geoquiz"
+        applicationId "com.example.geoquizjava"
         minSdk 24
         targetSdk 34
         versionCode 1

@@ -1,4 +1,4 @@
-package com.example.geoquiz;
+package com.example.geoquizjava;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;

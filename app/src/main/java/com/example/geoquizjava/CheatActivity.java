@@ -1,4 +1,4 @@
-package com.example.geoquiz;
+package com.example.geoquizjava;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class CheatActivity extends AppCompatActivity {
-    public static final String EXTRA_ANSWER_SHOWN = "comexample.geoquiz.answer_shown";
-    private static final String EXTRA_ANSWER_IS_TRUE = "comexample.geoquiz.answer_is_true";
+    public static final String EXTRA_ANSWER_SHOWN = "comexample.geoquizjava.answer_shown";
+    private static final String EXTRA_ANSWER_IS_TRUE = "comexample.geoquizjava.answer_is_true";
     private final String TAG = "CheatActivity";
     private final String KEY_CHEATED = "cheated";
     private final String KEY_ANSWER_TEXT = "answerText";
