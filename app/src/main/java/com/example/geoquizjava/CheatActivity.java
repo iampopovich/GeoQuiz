@@ -68,7 +68,6 @@ public class CheatActivity extends AppCompatActivity {
             });
             animator.start();
         });
-
     }
 
     private void setAnswerShown() {

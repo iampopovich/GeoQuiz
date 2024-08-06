@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,6 +28,7 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton nextButton;
     private ImageButton cheatButton;
     private LinearLayout controlsLayout;
+    private TextView versionText;
 
 
     private int questionTextResId;
@@ -58,6 +60,15 @@ public class QuizActivity extends AppCompatActivity {
             quizViewModel.moveToNext();
             updateQuestion();
         });
+
+        versionText = findViewById(R.id.version_text);
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+            String version = pInfo.versionName;
+            versionText.setText(version);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ActivityResultLauncher<Intent> requestCheat =
                 registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
