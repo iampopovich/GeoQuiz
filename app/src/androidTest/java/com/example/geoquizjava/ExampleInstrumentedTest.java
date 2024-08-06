@@ -23,4 +23,30 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.geoquizjava", appContext.getPackageName());
     }
+
+    @Test
+    public void getNextQuestion() {
+
+    }
+
+    @Test
+    public void questionIsShown() {
+
+    }
+
+    @Test
+    public void cheatMenuIsShown() {
+    }
+
+    @Test
+    public void answerTrue() {
+    }
+
+    @Test
+    public void answerFalse() {
+    }
+
+    @Test
+    public void statsAreShownOnQuizFinish() {
+    }
 }
