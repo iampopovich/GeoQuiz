@@ -22,6 +22,7 @@ public class CheatActivity extends AppCompatActivity {
 
     private TextView answerTextView;
     private Button showAnswerButton;
+    private Button backButton;
     private CheatViewModel cheatViewModel;
     private boolean answerIsTrue;
 
@@ -47,6 +48,8 @@ public class CheatActivity extends AppCompatActivity {
         answerTextView.setText(cheatViewModel.answerText);
 
         showAnswerButton = findViewById(R.id.show_answer_button);
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(view -> finish());
         showAnswerButton.setOnClickListener(view -> {
             if (answerIsTrue) answerTextView.setText(R.string.button_true);
             else answerTextView.setText(R.string.button_false);
@@ -55,11 +58,12 @@ public class CheatActivity extends AppCompatActivity {
             int cy = showAnswerButton.getHeight() / 2;
             float radius = showAnswerButton.getWidth();
             Animator animator = ViewAnimationUtils.createCircularReveal(showAnswerButton, cx, cy, radius, 0);
-            animator.addListener(new AnimatorListenerAdapter(){
+            animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     showAnswerButton.setVisibility(View.INVISIBLE);
+                    backButton.setVisibility(View.VISIBLE);
                 }
             });
             animator.start();
