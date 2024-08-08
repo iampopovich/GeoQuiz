@@ -13,6 +13,9 @@ import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.geoquizjava.databinding.ActivityCheatBinding;
+import com.example.geoquizjava.databinding.ActivityMainBinding;
+
 public class CheatActivity extends AppCompatActivity {
     public static final String EXTRA_ANSWER_SHOWN = "comexample.geoquizjava.answer_shown";
     private static final String EXTRA_ANSWER_IS_TRUE = "comexample.geoquizjava.answer_is_true";
@@ -20,16 +23,16 @@ public class CheatActivity extends AppCompatActivity {
     private final String KEY_CHEATED = "cheated";
     private final String KEY_ANSWER_TEXT = "answerText";
 
-    private TextView answerTextView;
-    private Button showAnswerButton;
-    private Button backButton;
     private CheatViewModel cheatViewModel;
     private boolean answerIsTrue;
+    private ActivityCheatBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cheat);
+        binding = ActivityCheatBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         answerIsTrue = false;
 
@@ -44,26 +47,23 @@ public class CheatActivity extends AppCompatActivity {
 
         answerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
-        answerTextView = findViewById(R.id.answer_text_view);
-        answerTextView.setText(cheatViewModel.answerText);
+        binding.answerTextView.setText(cheatViewModel.answerText);
 
-        showAnswerButton = findViewById(R.id.show_answer_button);
-        backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(view -> finish());
-        showAnswerButton.setOnClickListener(view -> {
-            if (answerIsTrue) answerTextView.setText(R.string.button_true);
-            else answerTextView.setText(R.string.button_false);
+        binding.backButton.setOnClickListener(view -> finish());
+        binding.showAnswerButton.setOnClickListener(view -> {
+            if (answerIsTrue) binding.answerTextView.setText(R.string.button_true);
+            else binding.answerTextView.setText(R.string.button_false);
             setAnswerShown();
-            int cx = showAnswerButton.getWidth() / 2;
-            int cy = showAnswerButton.getHeight() / 2;
-            float radius = showAnswerButton.getWidth();
-            Animator animator = ViewAnimationUtils.createCircularReveal(showAnswerButton, cx, cy, radius, 0);
+            int cx = binding.showAnswerButton.getWidth() / 2;
+            int cy = binding.showAnswerButton.getHeight() / 2;
+            float radius = binding.showAnswerButton.getWidth();
+            Animator animator = ViewAnimationUtils.createCircularReveal(binding.showAnswerButton, cx, cy, radius, 0);
             animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    showAnswerButton.setVisibility(View.INVISIBLE);
-                    backButton.setVisibility(View.VISIBLE);
+                    binding.showAnswerButton.setVisibility(View.INVISIBLE);
+                    binding.backButton.setVisibility(View.VISIBLE);
                 }
             });
             animator.start();
@@ -73,7 +73,7 @@ public class CheatActivity extends AppCompatActivity {
     private void setAnswerShown() {
         Intent intent = new Intent().putExtra(EXTRA_ANSWER_SHOWN, true);
         cheatViewModel.cheatApplied = true;
-        cheatViewModel.answerText = answerTextView.getText().toString();
+        cheatViewModel.answerText = binding.answerTextView.getText().toString();
         setResult(RESULT_OK, intent);
     }
 

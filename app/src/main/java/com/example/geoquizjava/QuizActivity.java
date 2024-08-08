@@ -15,21 +15,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.geoquizjava.databinding.ActivityMainBinding;
+
 
 public class QuizActivity extends AppCompatActivity {
+
+
+
+    private ActivityMainBinding binding;
     private final String TAG = "MainActivity";
     private final String KEY_INDEX = "index";
     private final String KEY_CHEATER = "cheater";
 
     private QuizViewModel quizViewModel;
-    private ImageButton trueButton;
-    private ImageButton falseButton;
-    private TextView questionTextView;
-    private ImageButton nextButton;
-    private ImageButton cheatButton;
-    private LinearLayout controlsLayout;
-    private TextView versionText;
-
 
     private int questionTextResId;
     private int correctAnswers = 0;
@@ -41,31 +39,23 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        controlsLayout = findViewById(R.id.controls_layout);
-
-        trueButton = findViewById(R.id.button_true);
-        falseButton = findViewById(R.id.button_false);
-        questionTextView = findViewById(R.id.question_text_view);
-        nextButton = findViewById(R.id.button_next);
-        cheatButton = findViewById(R.id.cheat_button);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         quizViewModel = new ViewModelProvider(this).get(QuizViewModel.class);
         questionTextResId = quizViewModel.getCurrentQuestionText();
-
-        trueButton.setOnClickListener(view -> checkAnswer(true));
-        falseButton.setOnClickListener(view -> checkAnswer(false));
-        questionTextView.setText(questionTextResId);
-        nextButton.setOnClickListener(view -> {
+        binding.trueButton.setOnClickListener(view -> checkAnswer(true));
+        binding.falseButton.setOnClickListener(view -> checkAnswer(false));
+        binding.questionTextView.setText(questionTextResId);
+        binding.nextButton.setOnClickListener(view -> {
             quizViewModel.moveToNext();
             updateQuestion();
         });
 
-        versionText = findViewById(R.id.version_text);
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
             String version = pInfo.versionName;
-            versionText.setText(version);
+            binding.versionText.setText(version);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,12 +69,11 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
-        cheatButton.setOnClickListener(view -> {
+        binding.cheatButton.setOnClickListener(view -> {
             boolean answerIsTrue = quizViewModel.getCurrentAnswer();
             Intent intent = CheatActivity.newIntent(this, answerIsTrue);
             requestCheat.launch(intent);
         });
-
     }
 
     private void checkAnswer(boolean answer) {
@@ -107,10 +96,11 @@ public class QuizActivity extends AppCompatActivity {
 
     private void updateQuestion() {
         if (quizViewModel.isAnyQuestionAvailable()) {
-            questionTextView.setText(quizViewModel.getCurrentQuestionText());
+            binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
         } else {
-            questionTextView.setText(String.format("No more questions! Correct: %d Incorrect: %d", correctAnswers, incorrectAnswers));
-            controlsLayout.setVisibility(View.INVISIBLE);
+            binding.questionTextView.setText(
+                    String.format("No more questions! Correct: %d Incorrect: %d", correctAnswers, incorrectAnswers));
+            binding.controlsLayout.setVisibility(View.INVISIBLE);
         }
     }
 
