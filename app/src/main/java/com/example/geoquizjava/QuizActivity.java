@@ -2,6 +2,7 @@ package com.example.geoquizjava;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,16 +11,12 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.geoquizjava.databinding.ActivityMainBinding;
 
 
 public class QuizActivity extends AppCompatActivity {
-
 
 
     private ActivityMainBinding binding;
@@ -84,10 +81,9 @@ public class QuizActivity extends AppCompatActivity {
         } else if (answer == correctAnswer) {
             Toast.makeText(this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
             correctAnswers++;
-        } else if (answer != correctAnswer) {
+        } else {
             Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
             incorrectAnswers++;
-        } else {
         }
         quizViewModel.setViewed();
         quizViewModel.moveToNext();
@@ -105,7 +101,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.getCurrentIndex());
         savedInstanceState.putBoolean(KEY_CHEATER, quizViewModel.isCheater());

@@ -1,5 +1,6 @@
 package com.example.geoquizjava;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,11 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.geoquizjava.databinding.ActivityCheatBinding;
-import com.example.geoquizjava.databinding.ActivityMainBinding;
 
 public class CheatActivity extends AppCompatActivity {
     public static final String EXTRA_ANSWER_SHOWN = "comexample.geoquizjava.answer_shown";
@@ -78,7 +76,7 @@ public class CheatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean(KEY_CHEATED, cheatViewModel.cheatApplied);
         savedInstanceState.putString(KEY_ANSWER_TEXT, cheatViewModel.answerText);
