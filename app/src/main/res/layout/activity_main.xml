@@ -73,4 +73,14 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="20dp"/>
 
+    <Button
+        android:id="@+id/statsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/buttonStyle"
+        android:text="@string/stats"
+        app:layout_constraintBottom_toTopOf="@+id/versionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
