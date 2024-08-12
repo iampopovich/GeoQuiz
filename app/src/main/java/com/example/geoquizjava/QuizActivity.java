@@ -5,20 +5,31 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.geoquizjava.databinding.ActivityMainBinding;
+import com.example.geoquizjava.stats.QuizDatabase;
+import com.example.geoquizjava.stats.QuizEntity;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class QuizActivity extends AppCompatActivity {
 
 
+    private QuizDatabase quizDB;
     private ActivityMainBinding binding;
     private final String TAG = "MainActivity";
     private final String KEY_INDEX = "index";
@@ -37,6 +48,19 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                super.onCreate(db);
+            }
+
+            @Override
+            public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                super.onOpen(db);
+            }
+        };
+        quizDB = Room.databaseBuilder(this, QuizDatabase.class, "Statistics").addCallback(myCallback).build();
 
         quizViewModel = new ViewModelProvider(this).get(QuizViewModel.class);
         questionTextResId = quizViewModel.getCurrentQuestionText();
@@ -70,6 +94,10 @@ public class QuizActivity extends AppCompatActivity {
             Intent intent = CheatActivity.newIntent(this, answerIsTrue);
             requestCheat.launch(intent);
         });
+        binding.statsButton.setOnClickListener(view->{
+            Intent intent = new Intent(this, StatsActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void checkAnswer(boolean answer) {
@@ -95,6 +123,8 @@ public class QuizActivity extends AppCompatActivity {
         } else {
             binding.questionTextView.setText(
                     String.format("No more questions! Correct: %d Incorrect: %d", correctAnswers, incorrectAnswers));
+            QuizEntity entity = new QuizEntity(cheatsUsed, correctAnswers, incorrectAnswers);
+            addStatsInBackground(entity);
             binding.controlsLayout.setVisibility(View.INVISIBLE);
         }
     }
@@ -104,6 +134,13 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.getCurrentIndex());
         savedInstanceState.putBoolean(KEY_CHEATER, quizViewModel.isCheater());
+    }
+
+    public void addStatsInBackground(QuizEntity entity) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            quizDB.getQuizDAO().addQuizStats(entity);
+        });
     }
 
 }
