@@ -138,9 +138,7 @@ public class QuizActivity extends AppCompatActivity {
 
     public void addStatsInBackground(QuizEntity entity) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            quizDB.getQuizDAO().addQuizStats(entity);
-        });
+        executor.execute(() -> quizDB.getQuizDAO().addQuizStats(entity));
     }
 
 }
