@@ -24,6 +24,10 @@ public class QuizEntity {
         this.id = 0;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getCheatsUsed() {
         return cheatsUsed;
     }
@@ -33,19 +37,8 @@ public class QuizEntity {
     }
 
     public int getIncorrectAnswers() {
-        return correctAnswers;
+        return incorrectAnswers;
     }
 
-    public void setCheatsUsed(int value) {
-        this.cheatsUsed = value;
-    }
-
-    public void setCorrectAnswers(int value) {
-        this.correctAnswers = value;
-    }
-
-    public void setIncorrectAnswers(int value) {
-        this.incorrectAnswers = value;
-    }
 
 }

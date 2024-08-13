@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -15,7 +16,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.geoquizjava.databinding.ActivityStatsBinding;
 import com.example.geoquizjava.stats.QuizDatabase;
 import com.example.geoquizjava.stats.QuizEntity;
+import com.example.geoquizjava.stats.QuizItem;
+import com.example.geoquizjava.stats.StatsAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -53,11 +57,21 @@ public class StatsActivity extends AppCompatActivity {
         });
     }
 
-    public void getStatsInBackground(){
+    public void getStatsInBackground() {
+        List<QuizItem> quizItemList = new ArrayList<>();
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(()->{
-            QuizEntity entity = quizDB.getQuizDAO().getLatestGameStats();
-            binding.textView.setText(entity.getCheatsUsed() + " " + entity.getCorrectAnswers() + " " + entity.getIncorrectAnswers());
+        executor.execute(() -> {
+            QuizEntity entityL = quizDB.getQuizDAO().getLatestGameStats();
+            List<QuizEntity> entities = quizDB.getQuizDAO().getAllStats();
+            for (QuizEntity entity : entities) {
+                if (entity == null) {
+                    return;
+                }
+                quizItemList.add(new QuizItem(entity.getCorrectAnswers(), entity.getIncorrectAnswers(), entity.getCheatsUsed()));
+            }
+            binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            StatsAdapter adapter = new StatsAdapter(this, quizItemList);
+            binding.recyclerView.setAdapter(adapter);
         });
     }
 }
