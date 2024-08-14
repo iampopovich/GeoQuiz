@@ -1,4 +1,6 @@
-package com.example.geoquizjava;
+package com.example.geoquizjava.results;
+
+import static java.lang.String.format;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.geoquizjava.quiz.QuizActivity;
+import com.example.geoquizjava.R;
 import com.example.geoquizjava.databinding.ActivityResultBinding;
+import com.example.geoquizjava.stats.StatsActivity;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private ActivityResultBinding binding;
     private static final String EXTRA_CORRECT_ANSWERS = "com.example.geoquizjava.correct_answers";
     private static final String EXTRA_INCORRECT_ANSWERS = "com.example.geoquizjava.incorrect_answers";
     private static final String EXTRA_CHEATS_USED = "com.example.geoquizjava.cheats_used";
@@ -23,7 +27,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityResultBinding.inflate(getLayoutInflater());
+        ActivityResultBinding binding = ActivityResultBinding.inflate(getLayoutInflater());
 
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
@@ -49,10 +53,10 @@ public class ResultActivity extends AppCompatActivity {
 
 
 
-        String correctAnswers = String.format("Correct: %d", getIntent().getIntExtra(EXTRA_CORRECT_ANSWERS, 0));
-        String incorrectAnswers = String.format("Incorrect: %d", getIntent().getIntExtra(EXTRA_INCORRECT_ANSWERS, 0));
-        String cheatsUsed = String.format("Cheats used: %d", getIntent().getIntExtra(EXTRA_CHEATS_USED, 0));
-        binding.resultTextView.setText(String.format("%s\n%s\n%s", correctAnswers, incorrectAnswers, cheatsUsed));
+        String correctAnswers = format("Correct: %d", getIntent().getIntExtra(EXTRA_CORRECT_ANSWERS, 0));
+        String incorrectAnswers = format("Incorrect: %d", getIntent().getIntExtra(EXTRA_INCORRECT_ANSWERS, 0));
+        String cheatsUsed = format("Cheats used: %d", getIntent().getIntExtra(EXTRA_CHEATS_USED, 0));
+        binding.resultTextView.setText(format("%s\n%s\n%s", correctAnswers, incorrectAnswers, cheatsUsed));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

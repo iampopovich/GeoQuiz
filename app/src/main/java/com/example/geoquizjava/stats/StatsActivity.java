@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.geoquizjava.stats;
 
 import android.os.Bundle;
 
@@ -13,15 +13,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.geoquizjava.R;
 import com.example.geoquizjava.databinding.ActivityStatsBinding;
-import com.example.geoquizjava.stats.QuizDatabase;
-import com.example.geoquizjava.stats.QuizEntity;
-import com.example.geoquizjava.stats.QuizItem;
-import com.example.geoquizjava.stats.StatsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class StatsActivity extends AppCompatActivity {
@@ -64,8 +60,8 @@ public class StatsActivity extends AppCompatActivity {
                 if (entity == null) return;
                 quizItemList.add(new QuizItem(entity.getCorrectAnswers(), entity.getIncorrectAnswers(), entity.getCheatsUsed()));
             }
-            binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            binding.recyclerView.setAdapter(new StatsAdapter(this, quizItemList));
+            binding.quizResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            binding.quizResultsRecyclerView.setAdapter(new StatsAdapter(quizItemList));
         });
     }
 }

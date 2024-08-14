@@ -5,29 +5,17 @@ public class QuizItem {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(int correctAnswers) {
-        this.correctAnswers = correctAnswers;
-    }
-
     public int getIncorrectAnswers() {
         return incorrectAnswers;
-    }
-
-    public void setIncorrectAnswers(int incorrectAnswers) {
-        this.incorrectAnswers = incorrectAnswers;
     }
 
     public int getCheatsUsed() {
         return cheatsUsed;
     }
 
-    public void setCheatsUsed(int cheatsUsed) {
-        this.cheatsUsed = cheatsUsed;
-    }
-
-    private int correctAnswers;
-    private int incorrectAnswers;
-    private int cheatsUsed;
+    private final int correctAnswers;
+    private final int incorrectAnswers;
+    private final int cheatsUsed;
 
     public QuizItem(int correctAnswers, int incorrectAnswers, int cheatsUsed) {
         this.correctAnswers = correctAnswers;

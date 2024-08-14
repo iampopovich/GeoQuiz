@@ -1,8 +1,6 @@
-package com.example.geoquizjava;
+package com.example.geoquizjava.cheats;
 
 import androidx.lifecycle.ViewModel;
-
-import java.util.Arrays;
 
 public class CheatViewModel extends ViewModel {
     private final String TAG = "CheatViewModel";

@@ -1,5 +1,7 @@
 package com.example.geoquizjava.stats;
 
+import static java.lang.String.*;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,9 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
 
 
     private List<QuizItem> quizItems;
-    private final Context context;
 
-    public StatsAdapter(Context context, List<QuizItem> quizItems) {
+    public StatsAdapter(List<QuizItem> quizItems) {
         this.quizItems = quizItems;
-        this.context = context;
     }
 
     @NonNull
@@ -34,9 +34,9 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull StatsAdapter.ViewHolder holder, int position) {
         QuizItem newsItem = quizItems.get(position);
-        holder.correctAnswersText.setText(String.format("correct answers: %d", newsItem.getCorrectAnswers()));
-        holder.incorrectAnswersText.setText(String.format("incorrect answers: %d", newsItem.getIncorrectAnswers()));
-        holder.cheatsUsedText.setText(String.format("cheats used: %d", newsItem.getCheatsUsed()));
+        holder.correctAnswersText.setText(format("correct answers: %d", newsItem.getCorrectAnswers()));
+        holder.incorrectAnswersText.setText(format("incorrect answers: %d", newsItem.getIncorrectAnswers()));
+        holder.cheatsUsedText.setText(format("cheats used: %d", newsItem.getCheatsUsed()));
     }
 
     @Override

@@ -1,6 +1,8 @@
-package com.example.geoquizjava;
+package com.example.geoquizjava.quiz;
 
 import androidx.lifecycle.ViewModel;
+
+import com.example.geoquizjava.R;
 
 import java.util.Arrays;
 

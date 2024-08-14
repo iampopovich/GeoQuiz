@@ -13,17 +13,17 @@
         android:theme="@style/Theme.GeoQuizJava"
         tools:targetApi="31" >
         <activity
-            android:name=".ResultActivity"
+            android:name=".results.ResultActivity"
             android:exported="false"
             android:theme="@style/Theme.GeoQuizJava" />
         <activity
-            android:name=".StatsActivity"
+            android:name=".stats.StatsActivity"
             android:exported="false" />
         <activity
-            android:name=".CheatActivity"
+            android:name=".cheats.CheatActivity"
             android:exported="false" />
         <activity
-            android:name=".QuizActivity"
+            android:name=".quiz.QuizActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

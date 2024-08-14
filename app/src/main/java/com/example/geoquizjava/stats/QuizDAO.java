@@ -10,11 +10,11 @@ import java.util.List;
 public interface QuizDAO  {
 
     @Insert
-    public void addQuizStats(QuizEntity entity);
+    void addQuizStats(QuizEntity entity);
 
     @Query("SELECT * FROM Statistics")
-    public List<QuizEntity> getAllStats();
+    List<QuizEntity> getAllStats();
 
     @Query("SELECT * FROM Statistics ORDER BY id DESC LIMIT 1")
-    public QuizEntity getLatestGameStats();
+    QuizEntity getLatestGameStats();
 }

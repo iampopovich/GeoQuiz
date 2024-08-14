@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.geoquizjava.cheats;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 
+import com.example.geoquizjava.R;
 import com.example.geoquizjava.databinding.ActivityCheatBinding;
 
 public class CheatActivity extends AppCompatActivity {

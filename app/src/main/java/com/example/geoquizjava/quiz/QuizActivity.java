@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.geoquizjava.quiz;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -13,14 +13,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 import android.widget.Toast;
 
+import com.example.geoquizjava.R;
+import com.example.geoquizjava.cheats.CheatActivity;
 import com.example.geoquizjava.databinding.ActivityMainBinding;
+import com.example.geoquizjava.results.ResultActivity;
 import com.example.geoquizjava.stats.QuizDatabase;
 import com.example.geoquizjava.stats.QuizEntity;
+import com.example.geoquizjava.stats.StatsActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
