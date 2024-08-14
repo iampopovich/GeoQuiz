@@ -22,10 +22,6 @@ public class Question {
         return answer;
     }
 
-    public boolean getViewed() {
-        return viewed;
-    }
-
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
     }

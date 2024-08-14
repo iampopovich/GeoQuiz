@@ -38,7 +38,6 @@ public class QuizActivity extends AppCompatActivity {
 
     private QuizViewModel quizViewModel;
 
-    private int questionTextResId;
     private int correctAnswers = 0;
     private int incorrectAnswers = 0;
     private int cheatsUsed = 0;
@@ -64,12 +63,10 @@ public class QuizActivity extends AppCompatActivity {
         quizDB = Room.databaseBuilder(this, QuizDatabase.class, "Statistics").addCallback(myCallback).build();
 
         quizViewModel = new ViewModelProvider(this).get(QuizViewModel.class);
-        questionTextResId = quizViewModel.getCurrentQuestionText();
         binding.trueButton.setOnClickListener(view -> checkAnswer(true));
         binding.falseButton.setOnClickListener(view -> checkAnswer(false));
-        binding.questionTextView.setText(questionTextResId);
+        binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
         binding.nextButton.setOnClickListener(view -> {
-            quizViewModel.moveToNext();
             updateQuestion();
         });
 
@@ -113,13 +110,12 @@ public class QuizActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
             incorrectAnswers++;
         }
-        quizViewModel.setViewed();
-        quizViewModel.moveToNext();
         updateQuestion();
     }
 
     private void updateQuestion() {
         if (quizViewModel.isAnyQuestionAvailable()) {
+            quizViewModel.moveToNext();
             binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
         } else {
             QuizEntity entity = new QuizEntity(cheatsUsed, correctAnswers, incorrectAnswers);
@@ -133,7 +129,6 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(KEY_INDEX, quizViewModel.getCurrentIndex());
         savedInstanceState.putBoolean(KEY_CHEATER, quizViewModel.isCheater());
     }
 
