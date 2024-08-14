@@ -59,19 +59,13 @@ public class StatsActivity extends AppCompatActivity {
 
     public void getStatsInBackground() {
         List<QuizItem> quizItemList = new ArrayList<>();
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            QuizEntity entityL = quizDB.getQuizDAO().getLatestGameStats();
-            List<QuizEntity> entities = quizDB.getQuizDAO().getAllStats();
-            for (QuizEntity entity : entities) {
-                if (entity == null) {
-                    return;
-                }
+        Executors.newSingleThreadExecutor().execute(() -> {
+            for (QuizEntity entity : quizDB.getQuizDAO().getAllStats()) {
+                if (entity == null) return;
                 quizItemList.add(new QuizItem(entity.getCorrectAnswers(), entity.getIncorrectAnswers(), entity.getCheatsUsed()));
             }
             binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            StatsAdapter adapter = new StatsAdapter(this, quizItemList);
-            binding.recyclerView.setAdapter(adapter);
+            binding.recyclerView.setAdapter(new StatsAdapter(this, quizItemList));
         });
     }
 }

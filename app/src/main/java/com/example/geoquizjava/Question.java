@@ -26,14 +26,6 @@ public class Question {
         return viewed;
     }
 
-    public void setTextResId(int textResId) {
-        this.textResId = textResId;
-    }
-
-    public void setAnswer(boolean answer) {
-        this.answer = answer;
-    }
-
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
     }

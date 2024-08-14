@@ -91,12 +91,12 @@ public class QuizActivity extends AppCompatActivity {
 
         binding.cheatButton.setOnClickListener(view -> {
             boolean answerIsTrue = quizViewModel.getCurrentAnswer();
-            Intent intent = CheatActivity.newIntent(this, answerIsTrue);
-            requestCheat.launch(intent);
+            Intent cheatIntent = CheatActivity.newIntent(this, answerIsTrue);
+            requestCheat.launch(cheatIntent);
         });
-        binding.statsButton.setOnClickListener(view->{
-            Intent intent = new Intent(this, StatsActivity.class);
-            startActivity(intent);
+        binding.statsButton.setOnClickListener(view -> {
+            Intent statsIntent = new Intent(this, StatsActivity.class);
+            startActivity(statsIntent);
         });
     }
 
@@ -121,11 +121,11 @@ public class QuizActivity extends AppCompatActivity {
         if (quizViewModel.isAnyQuestionAvailable()) {
             binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
         } else {
-            binding.questionTextView.setText(
-                    String.format("No more questions! Correct: %d Incorrect: %d", correctAnswers, incorrectAnswers));
             QuizEntity entity = new QuizEntity(cheatsUsed, correctAnswers, incorrectAnswers);
             addStatsInBackground(entity);
-            binding.controlsLayout.setVisibility(View.INVISIBLE);
+            finish();
+            Intent result = ResultActivity.newIntent(this, correctAnswers, incorrectAnswers, cheatsUsed);
+            startActivity(result);
         }
     }
 

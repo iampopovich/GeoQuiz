@@ -15,8 +15,8 @@ import android.view.ViewAnimationUtils;
 import com.example.geoquizjava.databinding.ActivityCheatBinding;
 
 public class CheatActivity extends AppCompatActivity {
-    public static final String EXTRA_ANSWER_SHOWN = "comexample.geoquizjava.answer_shown";
-    private static final String EXTRA_ANSWER_IS_TRUE = "comexample.geoquizjava.answer_is_true";
+    public static final String EXTRA_ANSWER_SHOWN = "com.example.geoquizjava.answer_shown";
+    private static final String EXTRA_ANSWER_IS_TRUE = "com.example.geoquizjava.answer_is_true";
     private final String TAG = "CheatActivity";
     private final String KEY_CHEATED = "cheated";
     private final String KEY_ANSWER_TEXT = "answerText";
