@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.geoquizjava.R;
@@ -67,7 +68,8 @@ public class QuizActivity extends AppCompatActivity {
         binding.falseButton.setOnClickListener(view -> checkAnswer(false));
         binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
         binding.nextButton.setOnClickListener(view -> {
-            updateQuestion();
+            quizViewModel.moveToNext();
+            binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
         });
 
         try {
@@ -112,6 +114,7 @@ public class QuizActivity extends AppCompatActivity {
         }
         updateQuestion();
     }
+
 
     private void updateQuestion() {
         if (quizViewModel.isAnyQuestionAvailable()) {

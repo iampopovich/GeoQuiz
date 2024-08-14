@@ -86,7 +86,12 @@ public class QuizViewModel extends ViewModel {
     private Question currentQuestion = availableQuestions.get(0);
 
     public void moveToNext() {
-        currentQuestion = availableQuestions.get(0);
+        if(getCurrentIndex() < availableQuestions.size() - 1) {
+            currentQuestion = availableQuestions.get(getCurrentIndex() + 1);
+        }
+        else {
+            currentQuestion = availableQuestions.get(0);
+        }
         isCheater = false;
     }
 
