@@ -28,7 +28,7 @@ public class QuizActivityTests {
     @Rule
     public ActivityScenarioRule<QuizActivity> activityRule = new ActivityScenarioRule<>(QuizActivity.class);
 
-    public Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+    public final Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
     @Test
     public void useAppContext() {

@@ -7,7 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface QuizDAO  {
+public interface QuizDAO {
 
     @Insert
     void addQuizStats(QuizEntity entity);

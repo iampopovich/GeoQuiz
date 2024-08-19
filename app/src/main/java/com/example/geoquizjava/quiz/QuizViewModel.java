@@ -93,10 +93,9 @@ public class QuizViewModel extends ViewModel {
     }
 
     public void moveToNext() {
-        if(getCurrentIndex() < availableQuestions.size() - 1) {
+        if (getCurrentIndex() < availableQuestions.size() - 1) {
             mCurrentQuestion.setValue(availableQuestions.get(getCurrentIndex() + 1));
-        }
-        else {
+        } else {
             mCurrentQuestion.setValue(availableQuestions.get(0));
         }
         mAnswerIsViewed.setValue(false);

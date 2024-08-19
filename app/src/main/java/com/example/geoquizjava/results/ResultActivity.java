@@ -13,9 +13,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.geoquizjava.quiz.QuizActivity;
 import com.example.geoquizjava.R;
 import com.example.geoquizjava.databinding.ActivityResultBinding;
+import com.example.geoquizjava.quiz.QuizActivity;
 import com.example.geoquizjava.stats.StatsActivity;
 
 public class ResultActivity extends AppCompatActivity {
@@ -50,7 +50,6 @@ public class ResultActivity extends AppCompatActivity {
             Intent mainIntent = new Intent(this, QuizActivity.class);
             startActivity(mainIntent);
         });
-
 
 
         String correctAnswers = format("Correct: %d", getIntent().getIntExtra(EXTRA_CORRECT_ANSWERS, 0));

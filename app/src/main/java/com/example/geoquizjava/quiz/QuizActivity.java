@@ -1,5 +1,11 @@
 package com.example.geoquizjava.quiz;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -8,12 +14,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.geoquizjava.R;
 import com.example.geoquizjava.cheats.CheatActivity;
