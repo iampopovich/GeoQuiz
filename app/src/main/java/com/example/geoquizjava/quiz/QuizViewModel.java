@@ -1,5 +1,6 @@
 package com.example.geoquizjava.quiz;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.geoquizjava.R;
@@ -8,36 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class QuizViewModel extends ViewModel {
-    private final String TAG = "QuizViewModel";
-    private boolean isCheater = false;
-
-    public Question getCurrentQuestion() {
-        return currentQuestion;
-    }
-
-    public boolean isCheater() {
-        return isCheater;
-    }
-
-    public int getCurrentIndex() {
-        return availableQuestions.indexOf(currentQuestion);
-    }
-
-    public void isCheater(boolean value) {
-        isCheater = value;
-    }
-
-    public boolean getCurrentAnswer() {
-        return currentQuestion.getAnswer();
-    }
-
-    public int getCurrentQuestionText() {
-        return currentQuestion.getTextResId();
-    }
-
     private final List<Question> mQuestionBank = Arrays.asList(
             new Question(R.string.question_australia, true, false),
             new Question(R.string.question_oceans, true, false),
@@ -75,28 +50,60 @@ public class QuizViewModel extends ViewModel {
             new Question(R.string.question_atacama_desert, true, false),
             new Question(R.string.question_kilimanjaro, true, false)
     );
-
-    private ArrayList<Question> availableQuestions = new ArrayList<>(
+    private final ArrayList<Question> availableQuestions = new ArrayList<>(
             mQuestionBank.stream().collect(
                     Collectors.collectingAndThen(Collectors.toList(), collected -> {
                         Collections.shuffle(collected);
                         return collected.stream();
                     })).limit(7).collect(Collectors.toList()));
 
-    private Question currentQuestion = availableQuestions.get(0);
+    private final MutableLiveData<Boolean> mAnswerIsViewed = new MutableLiveData<>();
+    private final MutableLiveData<Question> mCurrentQuestion = new MutableLiveData<>();
+
+
+    public QuizViewModel() {
+        mAnswerIsViewed.setValue(false);
+        mCurrentQuestion.setValue(availableQuestions.get(0));
+    }
+
+    private final String TAG = "QuizViewModel";
+
+    public Question getCurrentQuestion() {
+        return mCurrentQuestion.getValue();
+    }
+
+    public boolean getAnswerIsViewed() {
+        return Objects.requireNonNull(mAnswerIsViewed.getValue());
+    }
+
+    public int getCurrentIndex() {
+        return availableQuestions.indexOf(mCurrentQuestion.getValue());
+    }
+
+    public void setAnswerIsViewed(boolean value) {
+        mAnswerIsViewed.setValue(value);
+    }
+
+    public boolean getCurrentAnswer() {
+        return Objects.requireNonNull(mCurrentQuestion.getValue()).getAnswer();
+    }
+
+    public int getCurrentQuestionText() {
+        return Objects.requireNonNull(mCurrentQuestion.getValue()).getTextResId();
+    }
 
     public void moveToNext() {
         if(getCurrentIndex() < availableQuestions.size() - 1) {
-            currentQuestion = availableQuestions.get(getCurrentIndex() + 1);
+            mCurrentQuestion.setValue(availableQuestions.get(getCurrentIndex() + 1));
         }
         else {
-            currentQuestion = availableQuestions.get(0);
+            mCurrentQuestion.setValue(availableQuestions.get(0));
         }
-        isCheater = false;
+        mAnswerIsViewed.setValue(false);
     }
 
     public boolean isAnyQuestionAvailable() {
-        availableQuestions.remove(currentQuestion);
+        availableQuestions.remove(mCurrentQuestion.getValue());
         return !availableQuestions.isEmpty();
     }
 

@@ -18,7 +18,7 @@ import com.example.geoquizjava.R;
 public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> {
 
 
-    private List<QuizItem> quizItems;
+    private final List<QuizItem> quizItems;
 
     public StatsAdapter(List<QuizItem> quizItems) {
         this.quizItems = quizItems;

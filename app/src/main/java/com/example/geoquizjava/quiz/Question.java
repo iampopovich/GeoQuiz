@@ -3,8 +3,8 @@ package com.example.geoquizjava.quiz;
 import androidx.annotation.StringRes;
 
 public class Question {
-    private @StringRes int textResId;
-    private boolean answer;
+    private final @StringRes int textResId;
+    private final boolean answer;
     private boolean viewed;
 
 

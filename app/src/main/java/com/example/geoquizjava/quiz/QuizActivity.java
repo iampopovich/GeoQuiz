@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.geoquizjava.R;
@@ -84,14 +83,13 @@ public class QuizActivity extends AppCompatActivity {
                 registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        boolean isCheater = data != null && data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
-                        quizViewModel.isCheater(isCheater);
+                        boolean getAnswerIsViewed = data != null && data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+                        quizViewModel.setAnswerIsViewed(getAnswerIsViewed);
                     }
                 });
 
         binding.cheatButton.setOnClickListener(view -> {
-            boolean answerIsTrue = quizViewModel.getCurrentAnswer();
-            Intent cheatIntent = CheatActivity.newIntent(this, answerIsTrue);
+            Intent cheatIntent = CheatActivity.newIntent(this, quizViewModel.getCurrentAnswer());
             requestCheat.launch(cheatIntent);
         });
         binding.statsButton.setOnClickListener(view -> {
@@ -102,7 +100,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void checkAnswer(boolean answer) {
         boolean correctAnswer = quizViewModel.getCurrentAnswer();
-        if (quizViewModel.isCheater()) {
+        if (quizViewModel.getAnswerIsViewed()) {
             cheatsUsed++;
             Toast.makeText(this, R.string.judgment_toast, Toast.LENGTH_SHORT).show();
         } else if (answer == correctAnswer) {
@@ -132,7 +130,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBoolean(KEY_CHEATER, quizViewModel.isCheater());
+        savedInstanceState.putBoolean(KEY_CHEATER, quizViewModel.getAnswerIsViewed());
     }
 
     public void addStatsInBackground(QuizEntity entity) {
