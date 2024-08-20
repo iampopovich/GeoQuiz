@@ -1,19 +1,31 @@
 package com.example.geoquizjava.ui.trivia;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class TriviaViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<List<TriviaQuestion>> mQuestionList;
+
 
     public TriviaViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mQuestionList = new MutableLiveData<>(new ArrayList<>());
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void addQuestion(TriviaQuestion question) {
+        Objects.requireNonNull(mQuestionList.getValue()).add(question);
+    }
+
+    public void clearQuestions() {
+        Objects.requireNonNull(mQuestionList.getValue()).clear();
+    }
+
+    public List<TriviaQuestion> getQuestionList() {
+        return mQuestionList.getValue();
+
     }
 }
