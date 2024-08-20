@@ -14,42 +14,43 @@ import java.util.stream.Collectors;
 
 public class QuizViewModel extends ViewModel {
     private final List<Question> mQuestionBank = Arrays.asList(
-            new Question(R.string.question_australia, true, false),
-            new Question(R.string.question_oceans, true, false),
-            new Question(R.string.question_mideast, false, false),
-            new Question(R.string.question_africa, false, false),
-            new Question(R.string.question_americas, true, false),
-            new Question(R.string.question_asia, true, false),
-            new Question(R.string.question_antarctica, true, false),
-            new Question(R.string.question_india, false, false),
-            new Question(R.string.question_indonesia, true, false),
-            new Question(R.string.question_pakistan, false, false),
-            new Question(R.string.question_brazil, false, false),
-            new Question(R.string.question_argentina, true, false),
-            new Question(R.string.question_russia, false, false),
-            new Question(R.string.question_japan, true, false),
-            new Question(R.string.question_morocco, false, false),
-            new Question(R.string.question_lake_baikal, true, false),
-            new Question(R.string.question_mount_everest, true, false),
-            new Question(R.string.question_amazon_rainforest, true, false),
-            new Question(R.string.question_sahara_desert, true, false),
-            new Question(R.string.question_great_barrier_reef, true, false),
-            new Question(R.string.question_nile_river, false, false), // Правильный ответ — Амазонка
-            new Question(R.string.question_greenland, true, false),
-            new Question(R.string.question_vatican_city, true, false),
-            new Question(R.string.question_gobi_desert, true, false),
-            new Question(R.string.question_ganges_river, true, false),
-            new Question(R.string.question_rocky_mountains, true, false),
-            new Question(R.string.question_sydney_opera_house, true, false),
-            new Question(R.string.question_great_wall_of_china, true, false),
-            new Question(R.string.question_borneo_island, true, false),
-            new Question(R.string.question_polar_bears, true, false),
-            new Question(R.string.question_niagara_falls, true, false),
-            new Question(R.string.question_angel_falls, true, false),
-            new Question(R.string.question_mediterranean_sea, true, false),
-            new Question(R.string.question_atacama_desert, true, false),
-            new Question(R.string.question_kilimanjaro, true, false)
+            new Question(R.string.question_australia, true),
+            new Question(R.string.question_oceans, true),
+            new Question(R.string.question_mideast, false),
+            new Question(R.string.question_africa, false),
+            new Question(R.string.question_americas, true),
+            new Question(R.string.question_asia, true),
+            new Question(R.string.question_antarctica, true),
+            new Question(R.string.question_india, false),
+            new Question(R.string.question_indonesia, true),
+            new Question(R.string.question_pakistan, false),
+            new Question(R.string.question_brazil, false),
+            new Question(R.string.question_argentina, true),
+            new Question(R.string.question_russia, false),
+            new Question(R.string.question_japan, true),
+            new Question(R.string.question_morocco, false),
+            new Question(R.string.question_lake_baikal, true),
+            new Question(R.string.question_mount_everest, true),
+            new Question(R.string.question_amazon_rainforest, true),
+            new Question(R.string.question_sahara_desert, true),
+            new Question(R.string.question_great_barrier_reef, true),
+            new Question(R.string.question_nile_river, false), // Правильный ответ — Амазонка
+            new Question(R.string.question_greenland, true),
+            new Question(R.string.question_vatican_city, true),
+            new Question(R.string.question_gobi_desert, true),
+            new Question(R.string.question_ganges_river, true),
+            new Question(R.string.question_rocky_mountains, true),
+            new Question(R.string.question_sydney_opera_house, true),
+            new Question(R.string.question_great_wall_of_china, true),
+            new Question(R.string.question_borneo_island, true),
+            new Question(R.string.question_polar_bears, true),
+            new Question(R.string.question_niagara_falls, true),
+            new Question(R.string.question_angel_falls, true),
+            new Question(R.string.question_mediterranean_sea, true),
+            new Question(R.string.question_atacama_desert, true),
+            new Question(R.string.question_kilimanjaro, true)
     );
+
     private final ArrayList<Question> availableQuestions = new ArrayList<>(
             mQuestionBank.stream().collect(
                     Collectors.collectingAndThen(Collectors.toList(), collected -> {
@@ -67,10 +68,6 @@ public class QuizViewModel extends ViewModel {
     }
 
     private final String TAG = "QuizViewModel";
-
-    public Question getCurrentQuestion() {
-        return mCurrentQuestion.getValue();
-    }
 
     public boolean getAnswerIsViewed() {
         return Objects.requireNonNull(mAnswerIsViewed.getValue());

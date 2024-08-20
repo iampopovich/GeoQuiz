@@ -49,6 +49,7 @@
     <string name="question_mediterranean_sea">The Mediterranean Sea is connected to the Atlantic Ocean.</string>
     <string name="question_atacama_desert">The Atacama Desert is the driest non-polar desert in the world.</string>
     <string name="question_kilimanjaro">Mount Kilimanjaro is located in Tanzania.</string>
+    <string name="settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
 <!--    <string name="first_fragment_label">First Fragment</string>-->
 <!--    <string name="second_fragment_label">Second Fragment</string>-->

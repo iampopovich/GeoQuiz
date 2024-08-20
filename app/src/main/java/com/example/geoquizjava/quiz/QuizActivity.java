@@ -42,7 +42,6 @@ public class QuizActivity extends AppCompatActivity {
     private int incorrectAnswers = 0;
     private int cheatsUsed = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
