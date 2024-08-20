@@ -11,7 +11,7 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 1
-        versionName "v.1.4.2"
+        versionName "v.1.5.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation libs.volley
+    implementation libs.swiperefreshlayout
     implementation libs.room.runtime
     implementation libs.recyclerview
     implementation libs.navigation.fragment
