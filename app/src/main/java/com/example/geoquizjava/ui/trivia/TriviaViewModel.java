@@ -9,12 +9,7 @@ import java.util.Objects;
 
 public class TriviaViewModel extends ViewModel {
 
-    private final MutableLiveData<List<TriviaQuestion>> mQuestionList;
-
-
-    public TriviaViewModel() {
-        mQuestionList = new MutableLiveData<>(new ArrayList<>());
-    }
+    private final MutableLiveData<List<TriviaQuestion>> mQuestionList = new MutableLiveData<>(new ArrayList<>());
 
     public void addQuestion(TriviaQuestion question) {
         Objects.requireNonNull(mQuestionList.getValue()).add(question);
@@ -26,6 +21,9 @@ public class TriviaViewModel extends ViewModel {
 
     public List<TriviaQuestion> getQuestionList() {
         return mQuestionList.getValue();
+    }
 
+    public void setQuestions(List<TriviaQuestion> questions) {
+        mQuestionList.setValue(questions);
     }
 }
