@@ -1,4 +1,4 @@
-package com.example.geoquizjava.quiz;
+package com.example.geoquizjava.ui.quiz;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -51,23 +51,37 @@ public class QuizViewModel extends ViewModel {
             new Question(R.string.question_kilimanjaro, true)
     );
 
-    private final ArrayList<Question> availableQuestions = new ArrayList<>(
-            mQuestionBank.stream().collect(
-                    Collectors.collectingAndThen(Collectors.toList(), collected -> {
-                        Collections.shuffle(collected);
-                        return collected.stream();
-                    })).limit(7).collect(Collectors.toList()));
+    private final ArrayList<Question> availableQuestions = new ArrayList<>();
 
     private final MutableLiveData<Boolean> mAnswerIsViewed = new MutableLiveData<>();
     private final MutableLiveData<Question> mCurrentQuestion = new MutableLiveData<>();
-
+    private final MutableLiveData<Integer> mCorrectAnswers = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mIncorrectAnswers = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mCheatsUsed = new MutableLiveData<>();
 
     public QuizViewModel() {
         mAnswerIsViewed.setValue(false);
         mCurrentQuestion.setValue(availableQuestions.get(0));
+        mCorrectAnswers.setValue(0);
+        mIncorrectAnswers.setValue(0);
+        mCheatsUsed.setValue(0);
+        selectRandomQuestions();
     }
 
     private final String TAG = "QuizViewModel";
+
+
+    public MutableLiveData<Integer> getmCorrectAnswers() {
+        return mCorrectAnswers;
+    }
+
+    public MutableLiveData<Integer> getmIncorrectAnswers() {
+        return mIncorrectAnswers;
+    }
+
+    public MutableLiveData<Integer> getmCheatsUsed() {
+        return mCheatsUsed;
+    }
 
     public boolean getAnswerIsViewed() {
         return Objects.requireNonNull(mAnswerIsViewed.getValue());
@@ -89,7 +103,7 @@ public class QuizViewModel extends ViewModel {
         return Objects.requireNonNull(mCurrentQuestion.getValue()).getTextResId();
     }
 
-    public void moveToNext() {
+    public void moveToNextQuestion() {
         if (getCurrentIndex() < availableQuestions.size() - 1) {
             mCurrentQuestion.setValue(availableQuestions.get(getCurrentIndex() + 1));
         } else {
@@ -103,4 +117,25 @@ public class QuizViewModel extends ViewModel {
         return !availableQuestions.isEmpty();
     }
 
+    public void selectRandomQuestions() {
+        this.availableQuestions.clear();
+        this.availableQuestions.addAll(mQuestionBank.stream().collect(
+                        Collectors.collectingAndThen(Collectors.toList(), collected -> {
+                            Collections.shuffle(collected);
+                            return collected.stream();
+                        })).limit(7).collect(Collectors.toList()));
+
+    }
+
+    public void setCheatsUsed(int i) {
+        mCheatsUsed.setValue(i);
+    }
+
+    public void setCorrectAnswers(int i) {
+        mCorrectAnswers.setValue(i);
+    }
+
+    public void setIncorrectAnswers(int i) {
+        mIncorrectAnswers.setValue(i);
+    }
 }
