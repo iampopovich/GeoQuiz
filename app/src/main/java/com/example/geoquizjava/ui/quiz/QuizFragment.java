@@ -104,12 +104,10 @@ public class QuizFragment extends Fragment {
             new AlertDialog.Builder(this.getContext())
                     .setTitle("Quiz result")
                     .setMessage(correctAnswers + " correct answers,\n" + incorrectAnswers + " incorrect answers,\n" + cheatsUsed + " cheats used")
-                    .setPositiveButton("OK", (dialog, which) -> {
+                    .setPositiveButton("Reset", (dialog, which) -> {
                         reset();
                         dialog.dismiss();
-                    })
-                    .show();
-
+                    }).setOnCancelListener(dialog -> reset()).show();
         }
     }
 

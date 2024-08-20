@@ -60,12 +60,12 @@ public class QuizViewModel extends ViewModel {
     private final MutableLiveData<Integer> mCheatsUsed = new MutableLiveData<>();
 
     public QuizViewModel() {
+        selectRandomQuestions();
         mAnswerIsViewed.setValue(false);
         mCurrentQuestion.setValue(availableQuestions.get(0));
         mCorrectAnswers.setValue(0);
         mIncorrectAnswers.setValue(0);
         mCheatsUsed.setValue(0);
-        selectRandomQuestions();
     }
 
     private final String TAG = "QuizViewModel";
@@ -106,9 +106,9 @@ public class QuizViewModel extends ViewModel {
     public void moveToNextQuestion() {
         if (getCurrentIndex() < availableQuestions.size() - 1) {
             mCurrentQuestion.setValue(availableQuestions.get(getCurrentIndex() + 1));
-        } else {
+        } else if (getCurrentIndex() == availableQuestions.size() - 1) {
             mCurrentQuestion.setValue(availableQuestions.get(0));
-        }
+        } else return;
         mAnswerIsViewed.setValue(false);
     }
 
