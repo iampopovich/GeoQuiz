@@ -1,17 +1,15 @@
-package com.example.geoquizjava.quiz;
+package com.example.geoquizjava.ui.quiz;
 
 import androidx.annotation.StringRes;
 
 public class Question {
     private final @StringRes int textResId;
     private final boolean answer;
-    private boolean viewed;
 
 
-    public Question(@StringRes int textResId, boolean answer, boolean viewed) {
+    public Question(@StringRes int textResId, boolean answer) {
         this.textResId = textResId;
         this.answer = answer;
-        this.viewed = viewed;
     }
 
     public int getTextResId() {
@@ -22,7 +20,4 @@ public class Question {
         return answer;
     }
 
-    public void setViewed(boolean viewed) {
-        this.viewed = viewed;
-    }
 }
