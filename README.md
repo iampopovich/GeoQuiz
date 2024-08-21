@@ -15,4 +15,35 @@ GeoQuiz pet-app written in java
 
 
 если пользователь разрешает досутп в интернет - https://opentdb.com/api_config.php получаем вопросы отсюда
-позже попробую поддержать типы вопросов с множественными ответами
+позже попробую поддержать типы вопросов с множественными ответами  
+
+пример запроса  
+`https://opentdb.com/api.php?amount=2&type=boolean`  
+пример ответа  
+```json
+{
+  "response_code": 0,
+  "results": [
+    {
+      "type": "boolean",
+      "difficulty": "medium",
+      "category": "Science: Computers",
+      "question": "AMD created the first consumer 64-bit processor.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "type": "boolean",
+      "difficulty": "medium",
+      "category": "History",
+      "question": "The Korean War ended in 1953 without any ceasefire.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    }
+  ]
+}
+```
