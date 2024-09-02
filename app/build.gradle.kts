@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.geoquiz"
+    namespace = "com.example.takblet"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.geoquiz"
+        applicationId = "com.example.takblet"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

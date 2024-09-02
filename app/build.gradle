@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.geoquizjava'
+    namespace 'com.example.takblet'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.geoquizjava"
+        applicationId 'com.example.takblet'
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation libs.core.splashscreen
     implementation libs.volley
     implementation libs.swiperefreshlayout
     implementation libs.room.runtime
