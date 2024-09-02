@@ -1,5 +1,5 @@
-# GeoQuiz
-GeoQuiz pet-app written in java
+# tak-blЭt
+takblЭt pet project quiz app written in java
 
 Приложение написано для песочницы инструментальных тестов на Java  
 Проект взят из первой главы [книги](https://www.piter.com/collection/programmirovanie-pod-android-i-ios/product/android-programmirovanie-dlya-professionalov-3-e-izdanie) 
