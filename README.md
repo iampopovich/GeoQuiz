@@ -1,6 +1,6 @@
 # ТАК БЛЭТ
 
-![img_1.png](img_1.png)
+![img.png](img.png)
 
 ТБ pet project quiz app written in java
 
