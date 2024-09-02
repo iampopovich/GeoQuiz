@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.dashboard;
+package com.example.takblet.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.geoquizjava.databinding.FragmentDashboardBinding;
+import com.example.takblet.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
 

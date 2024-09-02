@@ -1,4 +1,4 @@
-package com.example.geoquizjava.stats;
+package com.example.takblet.stats;
 
 import static java.lang.String.format;
 
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.geoquizjava.R;
+import com.example.takblet.R;
 
 import java.util.List;
 

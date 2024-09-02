@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.trivia;
+package com.example.takblet.ui.trivia;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.geoquizjava.databinding.FragmentTriviaBinding;
+import com.example.takblet.databinding.FragmentTriviaBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.takblet;
 
 import org.junit.Test;
 

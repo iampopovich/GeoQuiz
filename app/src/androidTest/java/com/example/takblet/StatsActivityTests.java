@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.takblet;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -12,7 +12,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.geoquizjava.stats.StatsActivity;
+import com.example.takblet.stats.StatsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class StatsActivityTests {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.geoquizjava", appContext.getPackageName());
+        assertEquals("com.example.takblet", appContext.getPackageName());
     }
 
     @Test

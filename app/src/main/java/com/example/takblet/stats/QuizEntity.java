@@ -1,4 +1,4 @@
-package com.example.geoquizjava.stats;
+package com.example.takblet.stats;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

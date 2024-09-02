@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.takblet;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.geoquizjava.databinding.ActivityMainBinding;
+import com.example.takblet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

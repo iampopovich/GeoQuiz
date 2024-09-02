@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.trivia;
+package com.example.takblet.ui.trivia;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.geoquizjava.R;
+import com.example.takblet.R;
 
 import java.util.List;
 

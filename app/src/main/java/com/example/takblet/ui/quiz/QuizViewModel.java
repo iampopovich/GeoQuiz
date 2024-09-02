@@ -1,9 +1,9 @@
-package com.example.geoquizjava.ui.quiz;
+package com.example.takblet.ui.quiz;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.geoquizjava.R;
+import com.example.takblet.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

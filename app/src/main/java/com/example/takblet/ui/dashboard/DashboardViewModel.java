@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.dashboard;
+package com.example.takblet.ui.dashboard;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

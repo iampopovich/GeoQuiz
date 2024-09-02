@@ -1,4 +1,4 @@
-package com.example.geoquizjava.stats;
+package com.example.takblet.stats;
 
 public class QuizItem {
     public int getCorrectAnswers() {

@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.quiz;
+package com.example.takblet.ui.quiz;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.geoquizjava.R;
-import com.example.geoquizjava.databinding.FragmentQuizBinding;
-import com.example.geoquizjava.stats.QuizDatabase;
-import com.example.geoquizjava.stats.QuizEntity;
+import com.example.takblet.R;
+import com.example.takblet.databinding.FragmentQuizBinding;
+import com.example.takblet.stats.QuizDatabase;
+import com.example.takblet.stats.QuizEntity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.quiz;
+package com.example.takblet.ui.quiz;
 
 import androidx.annotation.StringRes;
 

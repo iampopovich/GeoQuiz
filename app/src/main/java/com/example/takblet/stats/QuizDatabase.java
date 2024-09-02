@@ -1,4 +1,4 @@
-package com.example.geoquizjava.stats;
+package com.example.takblet.stats;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

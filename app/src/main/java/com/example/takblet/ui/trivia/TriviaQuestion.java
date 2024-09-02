@@ -1,4 +1,4 @@
-package com.example.geoquizjava.ui.trivia;
+package com.example.takblet.ui.trivia;
 
 public class TriviaQuestion {
 

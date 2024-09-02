@@ -1,4 +1,4 @@
-package com.example.geoquizjava.stats;
+package com.example.takblet.stats;
 
 import android.os.Bundle;
 
@@ -13,8 +13,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.geoquizjava.R;
-import com.example.geoquizjava.databinding.ActivityStatsBinding;
+import com.example.takblet.R;
+import com.example.takblet.databinding.ActivityStatsBinding;
 
 import java.util.ArrayList;
 import java.util.List;

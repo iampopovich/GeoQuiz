@@ -1,27 +1,19 @@
-package com.example.geoquizjava.results;
+package com.example.takblet.results;
 
 import static java.lang.String.format;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.geoquizjava.R;
-import com.example.geoquizjava.databinding.ActivityResultBinding;
-import com.example.geoquizjava.stats.StatsActivity;
+import com.example.takblet.R;
+import com.example.takblet.databinding.ActivityResultBinding;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private static final String EXTRA_CORRECT_ANSWERS = "com.example.geoquizjava.correct_answers";
-    private static final String EXTRA_INCORRECT_ANSWERS = "com.example.geoquizjava.incorrect_answers";
-    private static final String EXTRA_CHEATS_USED = "com.example.geoquizjava.cheats_used";
+    private static final String EXTRA_CORRECT_ANSWERS = "com.example.takblet.correct_answers";
+    private static final String EXTRA_INCORRECT_ANSWERS = "com.example.takblet.incorrect_answers";
+    private static final String EXTRA_CHEATS_USED = "com.example.takblet.cheats_used";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

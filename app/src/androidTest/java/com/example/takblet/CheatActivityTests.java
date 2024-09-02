@@ -1,4 +1,4 @@
-package com.example.geoquizjava;
+package com.example.takblet;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -20,7 +20,7 @@ public class CheatActivityTests {
 //    public void useAppContext() {
 //        // Context of the app under test.
 //        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-//        assertEquals("com.example.geoquizjava", appContext.getPackageName());
+//        assertEquals("com.example.takblet", appContext.getPackageName());
 //    }
 //
 //    @Test
