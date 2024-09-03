@@ -1,6 +1,13 @@
 # ТАК БЛЭТ
 
-![pngwing com](https://github.com/user-attachments/assets/e958e1f0-a1cd-4050-961b-fc1d0be127d1)
+![image](https://github.com/user-attachments/assets/38099dab-243a-4f18-b84d-1306cc1152eb)
+![image](https://github.com/user-attachments/assets/a3d4bed4-fdef-45c2-bb1c-ba50345548b9)
+![image](https://github.com/user-attachments/assets/600c17e5-85a6-4541-a5ba-80dee8634861)
+![image](https://github.com/user-attachments/assets/19492d71-3d59-4d15-abd6-483370150954)
+
+
+
+
 
 ТБ pet project quiz app written in java
 
