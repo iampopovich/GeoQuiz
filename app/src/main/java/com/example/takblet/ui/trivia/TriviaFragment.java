@@ -1,18 +1,26 @@
 package com.example.takblet.ui.trivia;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.takblet.R;
 import com.example.takblet.databinding.FragmentTriviaBinding;
 
 import org.json.JSONArray;
@@ -25,6 +33,10 @@ public class TriviaFragment extends Fragment {
     private TriviaViewModel triviaViewModel;
     private RequestQueue requestQueue;
     private static final String FETCH_QUESTIONS = "FETCH_QUESTIONS";
+    private MenuProvider menuProvider;
+    private int questionsAmount;
+    private String category;
+    private String difficulty;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,7 +53,31 @@ public class TriviaFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(new TriviaAdapter(getContext(), triviaViewModel.getQuestionList()));
         requestQueue = Volley.newRequestQueue(this.requireContext());
+        menuProvider = new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                menuInflater.inflate(R.menu.settings_menu, menu);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.action_settings) {
+                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main).navigate(R.id.settingsFragment);
+                    return true;
+                }
+                return false;
+            }
+        };
+        requireActivity().addMenuProvider(menuProvider);
+        loadSettings();
         return root;
+    }
+
+    private void loadSettings() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        questionsAmount = Integer.parseInt(pref.getString("amount_preference", "10"));
+        category = pref.getString("category_preference", "");
+        difficulty = pref.getString("difficulty_preference", "");
     }
 
     @Override
@@ -51,11 +87,15 @@ public class TriviaFragment extends Fragment {
     }
 
     private void fetchQuestion() {
-        StringRequest request = new StringRequest("https://opentdb.com/api.php?amount=20&type=boolean",
+        StringBuilder url = new StringBuilder("https://opentdb.com/api.php?")
+                .append("amount=").append(questionsAmount)
+                .append("&type=boolean");
+        if (!category.isEmpty()) url.append("&category=").append(category);
+        if (!difficulty.isEmpty()) url.append("&difficulty=").append(difficulty);
+        StringRequest request = new StringRequest(url.toString(),
                 response -> {
                     try {
-                        JSONArray results = new JSONObject(response)
-                                .getJSONArray("results");
+                        JSONArray results = new JSONObject(response).getJSONArray("results");
                         for (int i = 0; i < results.length(); i++) {
                             JSONObject result = results.getJSONObject(i);
                             triviaViewModel.addQuestion(new TriviaQuestion(
@@ -81,5 +121,6 @@ public class TriviaFragment extends Fragment {
         binding = null;
         requestQueue.stop();
         requestQueue.cancelAll(FETCH_QUESTIONS);
+        requireActivity().removeMenuProvider(menuProvider);
     }
 }

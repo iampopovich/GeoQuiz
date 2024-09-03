@@ -16,13 +16,27 @@
         android:id="@+id/navigation_trivia"
         android:name="com.example.takblet.ui.trivia.TriviaFragment"
         android:label="@string/title_trivia"
-        tools:layout="@layout/fragment_trivia" />
+        tools:layout="@layout/fragment_trivia" >
+        <action
+            android:id="@+id/action_navigation_trivia_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.takblet.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.takblet.ui.SettingsFragment"
+        android:label="@string/settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_navigation_trivia"
+            app:destination="@id/navigation_trivia"
+            app:popUpToInclusive="@id/navigation_trivia"/>
+    </fragment>
 
 
 </navigation>

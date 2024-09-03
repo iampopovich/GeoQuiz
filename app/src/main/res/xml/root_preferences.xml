@@ -1,0 +1,28 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="Preference category">
+        <ListPreference
+            android:defaultValue=""
+            android:entries="@array/category_entries"
+            android:entryValues="@array/category_values"
+            android:key="category_preference"
+            android:title="Category" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Preference category">
+    <ListPreference
+        android:defaultValue=""
+        android:entries="@array/difficulty_entries"
+        android:entryValues="@array/difficulty_values"
+        android:key="difficulty_preference"
+        android:title="Difficulty" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Preference category">
+    <ListPreference
+        android:defaultValue="10"
+        android:entries="@array/amount_entries"
+        android:entryValues="@array/amount_values"
+        android:key="amount_preference"
+        android:title="Amount" />
+    </PreferenceCategory>
+</PreferenceScreen>
