@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
@@ -16,12 +15,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.takblet.databinding.FragmentStatsBinding;
 
-import java.util.List;
 import java.util.concurrent.Executors;
 
 public class StatsFragment extends Fragment {
 
-    private QuizDatabase quizDB;
+    private StatsDatabase quizDB;
     private FragmentStatsBinding binding;
     private StatsViewModel statsViewModel;
 
@@ -47,7 +45,7 @@ public class StatsFragment extends Fragment {
         binding.quizResultsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         StatsAdapter adapter = new StatsAdapter(requireContext(), statsViewModel.getStats());
         binding.quizResultsRecyclerView.setAdapter(adapter);
-        quizDB = Room.databaseBuilder(requireContext(), QuizDatabase.class, "Statistics").addCallback(myCallback).build();
+        quizDB = Room.databaseBuilder(requireContext(), StatsDatabase.class, "Statistics").addCallback(myCallback).build();
         getStatsInBackground();
         return root;
     }
@@ -62,9 +60,9 @@ public class StatsFragment extends Fragment {
     public void getStatsInBackground() {
         statsViewModel.clearEntities();
         Executors.newSingleThreadExecutor().execute(() -> {
-            for (QuizEntity entity : quizDB.getQuizDAO().getAllStats()) {
+            for (StatsEntity entity : quizDB.getStatsDAO().getAllStats()) {
                 if (entity == null) return;
-                statsViewModel.addEntity(new QuizItem(entity.getCorrectAnswers(), entity.getIncorrectAnswers(), entity.getCheatsUsed()));
+                statsViewModel.addEntity(new StatsItem(entity.getCorrectAnswers(), entity.getIncorrectAnswers(), entity.getCheatsUsed()));
             }
             requireActivity().runOnUiThread(() -> {
                 binding.quizResultsRecyclerView.getAdapter().notifyDataSetChanged();

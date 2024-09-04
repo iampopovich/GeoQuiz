@@ -16,8 +16,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.takblet.R;
 import com.example.takblet.databinding.FragmentQuizBinding;
-import com.example.takblet.ui.stats.QuizDatabase;
-import com.example.takblet.ui.stats.QuizEntity;
+import com.example.takblet.ui.stats.StatsDatabase;
+import com.example.takblet.ui.stats.StatsEntity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 public class QuizFragment extends Fragment {
 
     private FragmentQuizBinding binding;
-    private QuizDatabase quizDB;
+    private StatsDatabase statsDB;
     private QuizViewModel quizViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,9 +46,9 @@ public class QuizFragment extends Fragment {
                 super.onOpen(db);
             }
         };
-        quizDB = Room.databaseBuilder(
+        statsDB = Room.databaseBuilder(
                 this.requireContext(),
-                QuizDatabase.class,
+                StatsDatabase.class,
                 "Statistics").addCallback(myCallback).build();
 
         binding.trueButton.setOnClickListener(view -> checkAnswer(true));
@@ -98,7 +98,7 @@ public class QuizFragment extends Fragment {
             int correctAnswers = quizViewModel.getmCorrectAnswers().getValue();
             int incorrectAnswers = quizViewModel.getmIncorrectAnswers().getValue();
             int cheatsUsed = quizViewModel.getmCheatsUsed().getValue();
-            QuizEntity entity = new QuizEntity(correctAnswers, incorrectAnswers, cheatsUsed);
+            StatsEntity entity = new StatsEntity(correctAnswers, incorrectAnswers, cheatsUsed);
             addStatsInBackground(entity);
 
             new AlertDialog.Builder(this.getContext())
@@ -111,9 +111,9 @@ public class QuizFragment extends Fragment {
         }
     }
 
-    public void addStatsInBackground(QuizEntity entity) {
+    public void addStatsInBackground(StatsEntity entity) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> quizDB.getQuizDAO().addQuizStats(entity));
+        executor.execute(() -> statsDB.getStatsDAO().addQuizStats(entity));
     }
 
     public void reset() {

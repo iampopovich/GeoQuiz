@@ -1,6 +1,6 @@
 package com.example.takblet.ui.stats;
 
-public class QuizItem {
+public class StatsItem {
     public int getCorrectAnswers() {
         return correctAnswers;
     }
@@ -17,7 +17,7 @@ public class QuizItem {
     private final int incorrectAnswers;
     private final int cheatsUsed;
 
-    public QuizItem(int correctAnswers, int incorrectAnswers, int cheatsUsed) {
+    public StatsItem(int correctAnswers, int incorrectAnswers, int cheatsUsed) {
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;
         this.cheatsUsed = cheatsUsed;
