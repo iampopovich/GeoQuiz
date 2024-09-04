@@ -15,6 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.takblet.databinding.FragmentStatsBinding;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 
 public class StatsFragment extends Fragment {
@@ -30,7 +31,6 @@ public class StatsFragment extends Fragment {
 
         binding = FragmentStatsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         RoomDatabase.Callback myCallback = new RoomDatabase.Callback() {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -45,9 +45,12 @@ public class StatsFragment extends Fragment {
         binding.quizResultsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         StatsAdapter adapter = new StatsAdapter(requireContext(), statsViewModel.getStats().getValue());
         binding.quizResultsRecyclerView.setAdapter(adapter);
-        statsViewModel.getStats().observe(getViewLifecycleOwner(), stats -> adapter.notifyDataSetChanged());
+        statsViewModel.getStats().observe(getViewLifecycleOwner(), stats -> {
+            adapter.notifyDataSetChanged();
+        });
         statsDB = Room.databaseBuilder(requireContext(), StatsDatabase.class, "Statistics").addCallback(myCallback).build();
         getStatsInBackground();
+
         return root;
     }
 
@@ -56,7 +59,6 @@ public class StatsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 
     public void getStatsInBackground() {
         statsViewModel.clearEntities();
@@ -67,5 +69,4 @@ public class StatsFragment extends Fragment {
             }
         });
     }
-
 }
