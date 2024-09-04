@@ -1,7 +1,8 @@
-package com.example.takblet.stats;
+package com.example.takblet.ui.stats;
 
 import static java.lang.String.format;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
 
     private final List<QuizItem> quizItems;
 
-    public StatsAdapter(List<QuizItem> quizItems) {
+    public StatsAdapter(Context context, List<QuizItem> quizItems) {
         this.quizItems = quizItems;
     }
 

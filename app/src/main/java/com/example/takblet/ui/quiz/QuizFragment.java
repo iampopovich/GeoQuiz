@@ -16,8 +16,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.takblet.R;
 import com.example.takblet.databinding.FragmentQuizBinding;
-import com.example.takblet.stats.QuizDatabase;
-import com.example.takblet.stats.QuizEntity;
+import com.example.takblet.ui.stats.QuizDatabase;
+import com.example.takblet.ui.stats.QuizEntity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
