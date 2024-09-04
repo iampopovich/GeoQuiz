@@ -17,7 +17,7 @@ public class StatsEntity {
     @PrimaryKey(autoGenerate = true)
     int id;
 
-    public StatsEntity(int cheatsUsed, int correctAnswers, int incorrectAnswers) {
+    public StatsEntity(int correctAnswers, int incorrectAnswers,int cheatsUsed) {
         this.cheatsUsed = cheatsUsed;
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;

@@ -98,9 +98,6 @@ public class QuizFragment extends Fragment {
             int correctAnswers = quizViewModel.getmCorrectAnswers().getValue();
             int incorrectAnswers = quizViewModel.getmIncorrectAnswers().getValue();
             int cheatsUsed = quizViewModel.getmCheatsUsed().getValue();
-            StatsEntity entity = new StatsEntity(correctAnswers, incorrectAnswers, cheatsUsed);
-            addStatsInBackground(entity);
-
             new AlertDialog.Builder(this.getContext())
                     .setTitle("Quiz result")
                     .setMessage(correctAnswers + " correct answers,\n" + incorrectAnswers + " incorrect answers,\n" + cheatsUsed + " cheats used")
@@ -108,6 +105,7 @@ public class QuizFragment extends Fragment {
                         reset();
                         dialog.dismiss();
                     }).setOnCancelListener(dialog -> reset()).show();
+            addStatsInBackground(new StatsEntity(correctAnswers, incorrectAnswers, cheatsUsed));
         }
     }
 
