@@ -1,5 +1,6 @@
 package com.example.takblet.ui.trivia;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -12,15 +13,17 @@ public class TriviaViewModel extends ViewModel {
     private final MutableLiveData<List<TriviaQuestion>> mQuestionList = new MutableLiveData<>(new ArrayList<>());
 
     public void addQuestion(TriviaQuestion question) {
-        Objects.requireNonNull(mQuestionList.getValue()).add(question);
+        List<TriviaQuestion> questions = Objects.requireNonNull(mQuestionList.getValue());
+        questions.add(question);
+        mQuestionList.postValue(questions);
     }
 
     public void clearQuestions() {
         Objects.requireNonNull(mQuestionList.getValue()).clear();
     }
 
-    public List<TriviaQuestion> getQuestionList() {
-        return mQuestionList.getValue();
+    public LiveData<List<TriviaQuestion>> getQuestionList() {
+        return mQuestionList;
     }
 
     public void setQuestions(List<TriviaQuestion> questions) {

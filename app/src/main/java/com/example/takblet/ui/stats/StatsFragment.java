@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 
 public class StatsFragment extends Fragment {
 
-    private StatsDatabase quizDB;
+    private StatsDatabase statsDB;
     private FragmentStatsBinding binding;
     private StatsViewModel statsViewModel;
 
@@ -43,9 +43,10 @@ public class StatsFragment extends Fragment {
             }
         };
         binding.quizResultsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        StatsAdapter adapter = new StatsAdapter(requireContext(), statsViewModel.getStats());
+        StatsAdapter adapter = new StatsAdapter(requireContext(), statsViewModel.getStats().getValue());
         binding.quizResultsRecyclerView.setAdapter(adapter);
-        quizDB = Room.databaseBuilder(requireContext(), StatsDatabase.class, "Statistics").addCallback(myCallback).build();
+        statsViewModel.getStats().observe(getViewLifecycleOwner(), stats -> adapter.notifyDataSetChanged());
+        statsDB = Room.databaseBuilder(requireContext(), StatsDatabase.class, "Statistics").addCallback(myCallback).build();
         getStatsInBackground();
         return root;
     }
@@ -60,13 +61,10 @@ public class StatsFragment extends Fragment {
     public void getStatsInBackground() {
         statsViewModel.clearEntities();
         Executors.newSingleThreadExecutor().execute(() -> {
-            for (StatsEntity entity : quizDB.getStatsDAO().getAllStats()) {
+            for (StatsEntity entity : statsDB.getStatsDAO().getAllStats()) {
                 if (entity == null) return;
                 statsViewModel.addEntity(new StatsItem(entity.getCorrectAnswers(), entity.getIncorrectAnswers(), entity.getCheatsUsed()));
             }
-            requireActivity().runOnUiThread(() -> {
-                binding.quizResultsRecyclerView.getAdapter().notifyDataSetChanged();
-            });
         });
     }
 

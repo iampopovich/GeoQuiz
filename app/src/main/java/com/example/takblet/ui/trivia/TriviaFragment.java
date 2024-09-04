@@ -46,12 +46,13 @@ public class TriviaFragment extends Fragment {
         View root = binding.getRoot();
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             triviaViewModel.clearQuestions();
-            binding.recyclerView.getAdapter().notifyDataSetChanged();
             fetchQuestion();
             binding.swipeRefreshLayout.setRefreshing(false);
         });
+        TriviaAdapter adapter = new TriviaAdapter(getContext(), triviaViewModel.getQuestionList().getValue());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.recyclerView.setAdapter(new TriviaAdapter(getContext(), triviaViewModel.getQuestionList()));
+        binding.recyclerView.setAdapter(adapter);
+        triviaViewModel.getQuestionList().observe(getViewLifecycleOwner(), questions -> adapter.notifyDataSetChanged());
         requestQueue = Volley.newRequestQueue(this.requireContext());
         menuProvider = new MenuProvider() {
             @Override
@@ -104,7 +105,6 @@ public class TriviaFragment extends Fragment {
                                     result.getString("difficulty"),
                                     result.getString("category")
                             ));
-                            binding.recyclerView.getAdapter().notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
