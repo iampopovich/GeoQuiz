@@ -1,5 +1,6 @@
 package com.example.takblet.ui.stats;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -17,15 +18,17 @@ public class StatsViewModel extends ViewModel {
     }
 
     public void addEntity(StatsItem item){
-        Objects.requireNonNull(mStats.getValue()).add(item);
+        List<StatsItem> items = Objects.requireNonNull(mStats.getValue());
+        items.add(item);
+        mStats.postValue(items);
     }
 
     public void clearEntities() {
         Objects.requireNonNull(mStats.getValue()).clear();
     }
 
-    public List<StatsItem> getStats() {
-        return mStats.getValue();
+    public LiveData<List<StatsItem>> getStats() {
+        return mStats;
     }
 
 }
