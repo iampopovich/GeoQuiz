@@ -1,4 +1,4 @@
-package com.example.takblet.stats;
+package com.example.takblet.ui.stats;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
