@@ -7,14 +7,14 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface QuizDAO {
+public interface StatsDAO {
 
     @Insert
-    void addQuizStats(QuizEntity entity);
+    void addQuizStats(StatsEntity entity);
 
     @Query("SELECT * FROM Statistics")
-    List<QuizEntity> getAllStats();
+    List<StatsEntity> getAllStats();
 
     @Query("SELECT * FROM Statistics ORDER BY id DESC LIMIT 1")
-    QuizEntity getLatestGameStats();
+    StatsEntity getLatestGameStats();
 }

@@ -9,14 +9,14 @@ import java.util.Objects;
 
 public class StatsViewModel extends ViewModel {
 
-    private final MutableLiveData<List<QuizItem>> mStats;
+    private final MutableLiveData<List<StatsItem>> mStats;
 
     public StatsViewModel() {
         mStats = new MutableLiveData<>();
-        mStats.setValue(new ArrayList<QuizItem>());
+        mStats.setValue(new ArrayList<StatsItem>());
     }
 
-    public void addEntity(QuizItem item){
+    public void addEntity(StatsItem item){
         Objects.requireNonNull(mStats.getValue()).add(item);
     }
 
@@ -24,7 +24,7 @@ public class StatsViewModel extends ViewModel {
         Objects.requireNonNull(mStats.getValue()).clear();
     }
 
-    public List<QuizItem> getStats() {
+    public List<StatsItem> getStats() {
         return mStats.getValue();
     }
 

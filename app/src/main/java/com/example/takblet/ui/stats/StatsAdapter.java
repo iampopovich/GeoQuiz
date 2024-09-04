@@ -19,10 +19,10 @@ import java.util.List;
 public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> {
 
 
-    private final List<QuizItem> quizItems;
+    private final List<StatsItem> statsItems;
 
-    public StatsAdapter(Context context, List<QuizItem> quizItems) {
-        this.quizItems = quizItems;
+    public StatsAdapter(Context context, List<StatsItem> statsItems) {
+        this.statsItems = statsItems;
     }
 
     @NonNull
@@ -34,7 +34,7 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull StatsAdapter.ViewHolder holder, int position) {
-        QuizItem newsItem = quizItems.get(position);
+        StatsItem newsItem = statsItems.get(position);
         holder.correctAnswersText.setText(format("correct answers: %d", newsItem.getCorrectAnswers()));
         holder.incorrectAnswersText.setText(format("incorrect answers: %d", newsItem.getIncorrectAnswers()));
         holder.cheatsUsedText.setText(format("cheats used: %d", newsItem.getCheatsUsed()));
@@ -42,7 +42,7 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return this.quizItems.size();
+        return this.statsItems.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

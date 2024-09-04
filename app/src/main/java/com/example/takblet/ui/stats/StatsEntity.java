@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Statistics")
-public class QuizEntity {
+public class StatsEntity {
 
     @ColumnInfo(name = "cheats_used")
     int cheatsUsed;
@@ -17,7 +17,7 @@ public class QuizEntity {
     @PrimaryKey(autoGenerate = true)
     int id;
 
-    public QuizEntity(int cheatsUsed, int correctAnswers, int incorrectAnswers) {
+    public StatsEntity(int cheatsUsed, int correctAnswers, int incorrectAnswers) {
         this.cheatsUsed = cheatsUsed;
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;
