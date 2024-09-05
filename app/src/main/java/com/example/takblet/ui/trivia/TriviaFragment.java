@@ -45,7 +45,6 @@ public class TriviaFragment extends Fragment {
         binding = FragmentTriviaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            triviaViewModel.clearQuestions();
             fetchQuestion();
             binding.swipeRefreshLayout.setRefreshing(false);
         });
@@ -88,6 +87,7 @@ public class TriviaFragment extends Fragment {
     }
 
     private void fetchQuestion() {
+        triviaViewModel.clearQuestions();
         StringBuilder url = new StringBuilder("https://opentdb.com/api.php?")
                 .append("amount=").append(questionsAmount)
                 .append("&type=boolean");

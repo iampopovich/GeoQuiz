@@ -1,4 +1,5 @@
 [versions]
+activityVersion = "1.9.2"
 agp = "8.5.2"
 androidxJunit = "1.2.1"
 animationGraphicsAndroid = "1.6.8"
@@ -25,6 +26,7 @@ legacySupportV4 = "1.0.0"
 preference = "1.2.1"
 
 [libraries]
+activity-v192 = { module = "androidx.activity:activity", version.ref = "activityVersion" }
 animation-graphics-android = { module = "androidx.compose.animation:animation-graphics-android", version.ref = "animationGraphicsAndroid" }
 appcompat-v170 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }

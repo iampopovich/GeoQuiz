@@ -14,10 +14,10 @@ public class StatsViewModel extends ViewModel {
 
     public StatsViewModel() {
         mStats = new MutableLiveData<>();
-        mStats.setValue(new ArrayList<StatsItem>());
+        mStats.setValue(new ArrayList<>());
     }
 
-    public void addEntity(StatsItem item){
+    public void addEntity(StatsItem item) {
         List<StatsItem> items = Objects.requireNonNull(mStats.getValue());
         items.add(item);
         mStats.postValue(items);
