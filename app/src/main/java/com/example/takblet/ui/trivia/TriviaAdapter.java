@@ -37,20 +37,22 @@ public class TriviaAdapter extends RecyclerView.Adapter<TriviaAdapter.ViewHolder
         TriviaQuestion item = questionList.get(position);
         holder.question.setText(item.getQuestion());
         holder.trueButton.setOnClickListener(v -> {
-            Toast.makeText(context, item.getAnswer() ? "correct" : "incorrect", Toast.LENGTH_SHORT).show();
-            questionList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, questionList.size());
-            item.setAnswered();
+            if (position < questionList.size()) {
+                Toast.makeText(context, item.getAnswer() ? "correct" : "incorrect", Toast.LENGTH_SHORT).show();
+                questionList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, questionList.size());
+                item.setAnswered();
+            }
         });
         holder.falseButton.setOnClickListener(v -> {
-            Toast.makeText(context, item.getAnswer() ? "incorrect" : "correct", Toast.LENGTH_SHORT).show();
-            // исусе . гпт говорит что вот это НАСТОЛЬКО ПРОСТО
-            // типа . просто нотифаем об изменении и лист сам реаранжится
-            questionList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, questionList.size());
-            item.setAnswered();
+            if (position < questionList.size()) {
+                Toast.makeText(context, item.getAnswer() ? "incorrect" : "correct", Toast.LENGTH_SHORT).show();
+                questionList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, questionList.size());
+                item.setAnswered();
+            }
         });
     }
 

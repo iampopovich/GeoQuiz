@@ -19,7 +19,9 @@ public class TriviaViewModel extends ViewModel {
     }
 
     public void clearQuestions() {
-        Objects.requireNonNull(mQuestionList.getValue()).clear();
+        List<TriviaQuestion> questions = Objects.requireNonNull(mQuestionList.getValue());
+        questions.clear();
+        mQuestionList.postValue(questions);
     }
 
     public void removeQuestion(TriviaQuestion question) {
