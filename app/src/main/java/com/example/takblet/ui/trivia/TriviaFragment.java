@@ -2,6 +2,7 @@ package com.example.takblet.ui.trivia;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -100,7 +101,7 @@ public class TriviaFragment extends Fragment {
                         for (int i = 0; i < results.length(); i++) {
                             JSONObject result = results.getJSONObject(i);
                             triviaViewModel.addQuestion(new TriviaQuestion(
-                                    result.getString("question"),
+                                    Html.fromHtml(result.getString("question"), Html.FROM_HTML_MODE_COMPACT).toString(),
                                     result.getString("correct_answer").equals("True"),
                                     result.getString("difficulty"),
                                     result.getString("category")
