@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+
     implementation libs.activity.v192
     implementation libs.core.splashscreen
     implementation libs.volley

@@ -7,38 +7,39 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "Statistics")
 public class StatsEntity {
 
-    @ColumnInfo(name = "cheats_used")
-    int cheatsUsed;
-    @ColumnInfo(name = "correct_answers")
-    int correctAnswers;
-    @ColumnInfo(name = "incorrect_answers")
-    int incorrectAnswers;
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
-    int id;
+  @ColumnInfo(name = "cheats_used")
+  int cheatsUsed;
 
-    public StatsEntity(int correctAnswers, int incorrectAnswers,int cheatsUsed) {
-        this.cheatsUsed = cheatsUsed;
-        this.correctAnswers = correctAnswers;
-        this.incorrectAnswers = incorrectAnswers;
-        this.id = 0;
-    }
+  @ColumnInfo(name = "correct_answers")
+  int correctAnswers;
 
-    public int getId() {
-        return id;
-    }
+  @ColumnInfo(name = "incorrect_answers")
+  int incorrectAnswers;
 
-    public int getCheatsUsed() {
-        return cheatsUsed;
-    }
+  @ColumnInfo(name = "id")
+  @PrimaryKey(autoGenerate = true)
+  int id;
 
-    public int getCorrectAnswers() {
-        return correctAnswers;
-    }
+  public StatsEntity(int correctAnswers, int incorrectAnswers, int cheatsUsed) {
+    this.cheatsUsed = cheatsUsed;
+    this.correctAnswers = correctAnswers;
+    this.incorrectAnswers = incorrectAnswers;
+    this.id = 0;
+  }
 
-    public int getIncorrectAnswers() {
-        return incorrectAnswers;
-    }
+  public int getId() {
+    return id;
+  }
 
+  public int getCheatsUsed() {
+    return cheatsUsed;
+  }
 
+  public int getCorrectAnswers() {
+    return correctAnswers;
+  }
+
+  public int getIncorrectAnswers() {
+    return incorrectAnswers;
+  }
 }
