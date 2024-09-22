@@ -6,17 +6,18 @@
     android:orientation="horizontal"
     android:padding="6dp">
     <TextView
-        android:id="@+id/questionTextView"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:layout_width="match_parent"
-        android:text="TextView" />
+            android:id="@+id/questionTextView"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_width="match_parent"
+            android:text="TextView"/>
 
     <ImageButton
         android:id="@+id/falseButton"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         app:srcCompat="@drawable/baseline_cancel_24" />
 
     <ImageButton
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         app:srcCompat="@drawable/baseline_check_circle_24" />
 </LinearLayout>
 

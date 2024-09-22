@@ -27,4 +27,16 @@ public class TriviaQuestion {
   public void setAnswered() {
     this.answered = true;
   }
+
+  public boolean getAnswered() {
+    return answered;
+  }
+
+  public String getDifficulty() {
+    return difficulty;
+  }
+
+  public String getCategory() {
+    return category;
+  }
 }

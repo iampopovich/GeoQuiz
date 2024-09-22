@@ -66,6 +66,8 @@ public class TriviaAdapter extends RecyclerView.Adapter<TriviaAdapter.ViewHolder
     private final TextView question;
     private final ImageButton trueButton;
     private final ImageButton falseButton;
+    private final TextView category = null;
+    private final TextView difficulty = null;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);

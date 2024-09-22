@@ -32,7 +32,7 @@ public class QuizFragment extends Fragment {
     binding = FragmentQuizBinding.inflate(inflater, container, false);
     pref = PreferenceManager.getDefaultSharedPreferences(requireContext());
     quizViewModel = new ViewModelProvider(this).get(QuizViewModel.class);
-    quizViewModel.selectRandomQuestions(pref.getInt("amount_preference", 10));
+    quizViewModel.selectRandomQuestions(10);
     binding.trueButton.setOnClickListener(view -> checkAnswer(true));
     binding.falseButton.setOnClickListener(view -> checkAnswer(false));
     binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
@@ -114,7 +114,7 @@ public class QuizFragment extends Fragment {
   }
 
   public void reset() {
-    quizViewModel.selectRandomQuestions(pref.getInt("amount_preference", 10));
+    quizViewModel.selectRandomQuestions(10);
     quizViewModel.setAnswerIsViewed(false);
     quizViewModel.setCorrectAnswers(0);
     quizViewModel.setIncorrectAnswers(0);
