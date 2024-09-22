@@ -31,16 +31,16 @@
     <string-array name="category_entries">
         <item>Any Category</item>
         <item>General Knowledge</item>
-        <item>Entertainment: Books</item>
-        <item>Entertainment: Film</item>
-        <item>Entertainment: Music</item>
-        <item>Entertainment: Musicals and Theatres</item>
-        <item>Entertainment: Television</item>
-        <item>Entertainment: Video Games</item>
-        <item>Entertainment: Board Games</item>
+        <item>Books</item>
+        <item>Film</item>
+        <item>Music</item>
+        <item>Musicals and Theatres</item>
+        <item>Television</item>
+        <item>Video Games</item>
+        <item>Board Games</item>
         <item>Science and Nature</item>
-        <item>Science: Computers</item>
-        <item>Science: Mathematics</item>
+        <item>Computers</item>
+        <item>Mathematics</item>
         <item>Mythology</item>
         <item>Sports</item>
         <item>Geography</item>
@@ -50,10 +50,10 @@
         <item>Celebrities</item>
         <item>Animals</item>
         <item>Vehicles</item>
-        <item>Entertainment: Comics</item>
-        <item>Science: Gadgets</item>
-        <item>Entertainment: Japanese Anime and Manga</item>
-        <item>Entertainment: Cartoon and Animations</item>
+        <item>Comics</item>
+        <item>Gadgets</item>
+        <item>Japanese Anime and Manga</item>
+        <item>Cartoon and Animations</item>
     </string-array>
 
     <string-array name="category_values">

@@ -50,7 +50,6 @@ public class QuizViewModel extends ViewModel {
           new Question(R.string.question_kilimanjaro, true));
 
   private final ArrayList<Question> availableQuestions = new ArrayList<>();
-
   private final MutableLiveData<Boolean> mAnswerIsViewed = new MutableLiveData<>();
   private final MutableLiveData<Question> mCurrentQuestion = new MutableLiveData<>();
   private final MutableLiveData<Integer> mCorrectAnswers = new MutableLiveData<>();
@@ -59,7 +58,6 @@ public class QuizViewModel extends ViewModel {
 
   public QuizViewModel() {
     mAnswerIsViewed.setValue(false);
-    mCurrentQuestion.setValue(availableQuestions.get(0));
     mCorrectAnswers.setValue(0);
     mIncorrectAnswers.setValue(0);
     mCheatsUsed.setValue(0);
@@ -126,6 +124,7 @@ public class QuizViewModel extends ViewModel {
                     }))
             .limit(limit)
             .collect(Collectors.toList()));
+    mCurrentQuestion.setValue(availableQuestions.get(0));
   }
 
   public void setCheatsUsed(int i) {

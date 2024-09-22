@@ -18,8 +18,6 @@ import com.example.takblet.R;
 import com.example.takblet.databinding.FragmentQuizBinding;
 import com.example.takblet.ui.stats.StatsDatabase;
 import com.example.takblet.ui.stats.StatsEntity;
-import java.util.Objects;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class QuizFragment extends Fragment {
@@ -27,51 +25,20 @@ public class QuizFragment extends Fragment {
   private FragmentQuizBinding binding;
   private StatsDatabase statsDB;
   private QuizViewModel quizViewModel;
+  private SharedPreferences pref;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
     binding = FragmentQuizBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
-    SharedPreferences pref =
-        PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(this.getContext()));
+    pref = PreferenceManager.getDefaultSharedPreferences(requireContext());
     quizViewModel = new ViewModelProvider(this).get(QuizViewModel.class);
-    quizViewModel.selectRandomQuestions(
-        Integer.parseInt(pref.getString("quiz_amount_preference", "10")));
-
-    RoomDatabase.Callback myCallback =
-        new RoomDatabase.Callback() {
-          @Override
-          public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-          }
-
-          @Override
-          public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-          }
-        };
-    statsDB =
-        Room.databaseBuilder(this.requireContext(), StatsDatabase.class, "Statistics")
-            .addCallback(myCallback)
-            .build();
-
+    quizViewModel.selectRandomQuestions(pref.getInt("amount_preference", 10));
     binding.trueButton.setOnClickListener(view -> checkAnswer(true));
     binding.falseButton.setOnClickListener(view -> checkAnswer(false));
     binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
-    binding.nextButton.setOnClickListener(
-        view -> {
-          quizViewModel.moveToNextQuestion();
-          binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
-        });
-
-    binding.cheatButton.setOnClickListener(
-        view -> {
-          boolean answer = quizViewModel.getCurrentAnswer();
-          Toast.makeText(this.getContext(), answer ? "true" : "false", Toast.LENGTH_SHORT).show();
-          quizViewModel.setAnswerIsViewed(true);
-        });
-    return root;
+    binding.nextButton.setOnClickListener(view -> fetchNextQuestion());
+    binding.cheatButton.setOnClickListener(view -> showCurrentAnswer());
+    return binding.getRoot();
   }
 
   @Override
@@ -125,16 +92,47 @@ public class QuizFragment extends Fragment {
   }
 
   public void addStatsInBackground(StatsEntity entity) {
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    executor.execute(() -> statsDB.getStatsDAO().addQuizStats(entity));
+    RoomDatabase.Callback myCallback =
+        new RoomDatabase.Callback() {
+          @Override
+          public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+          }
+
+          @Override
+          public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+          }
+        };
+    Executors.newSingleThreadExecutor().execute(
+        () ->
+            Room.databaseBuilder(this.requireContext(), StatsDatabase.class, "Statistics")
+                .addCallback(myCallback)
+                .build()
+                .getStatsDAO()
+                .addQuizStats(entity));
   }
 
   public void reset() {
-    quizViewModel.selectRandomQuestions();
+    quizViewModel.selectRandomQuestions(pref.getInt("amount_preference", 10));
     quizViewModel.setAnswerIsViewed(false);
     quizViewModel.setCorrectAnswers(0);
     quizViewModel.setIncorrectAnswers(0);
     quizViewModel.setCheatsUsed(0);
     binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
+  }
+
+  public void fetchNextQuestion() {
+    quizViewModel.moveToNextQuestion();
+    binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
+  }
+
+  public void showCurrentAnswer() {
+    Toast.makeText(
+            this.getContext(),
+            quizViewModel.getCurrentAnswer() ? "true" : "false",
+            Toast.LENGTH_SHORT)
+        .show();
+    quizViewModel.setAnswerIsViewed(true);
   }
 }
