@@ -50,14 +50,14 @@ public class QuizFragment extends Fragment {
   private void checkAnswer(boolean answer) {
     boolean correctAnswer = quizViewModel.getCurrentAnswer();
     if (quizViewModel.getAnswerIsViewed()) {
-      quizViewModel.setCheatsUsed(quizViewModel.getmCheatsUsed().getValue() + 1);
+      quizViewModel.setCheatsUsed(quizViewModel.getCheatsUsed().getValue() + 1);
       Toast.makeText(this.getContext(), R.string.judgment_toast, Toast.LENGTH_SHORT).show();
     } else if (answer == correctAnswer) {
       Toast.makeText(this.getContext(), R.string.correct_toast, Toast.LENGTH_SHORT).show();
-      quizViewModel.setCorrectAnswers(quizViewModel.getmCorrectAnswers().getValue() + 1);
+      quizViewModel.setCorrectAnswers(quizViewModel.getCorrectAnswers().getValue() + 1);
     } else {
       Toast.makeText(this.getContext(), R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
-      quizViewModel.setIncorrectAnswers(quizViewModel.getmIncorrectAnswers().getValue() + 1);
+      quizViewModel.setIncorrectAnswers(quizViewModel.getIncorrectAnswers().getValue() + 1);
     }
     updateQuestion();
   }
@@ -67,9 +67,9 @@ public class QuizFragment extends Fragment {
       quizViewModel.moveToNextQuestion();
       binding.questionTextView.setText(quizViewModel.getCurrentQuestionText());
     } else {
-      int correctAnswers = quizViewModel.getmCorrectAnswers().getValue();
-      int incorrectAnswers = quizViewModel.getmIncorrectAnswers().getValue();
-      int cheatsUsed = quizViewModel.getmCheatsUsed().getValue();
+      int correctAnswers = quizViewModel.getCorrectAnswers().getValue();
+      int incorrectAnswers = quizViewModel.getIncorrectAnswers().getValue();
+      int cheatsUsed = quizViewModel.getCheatsUsed().getValue();
       new AlertDialog.Builder(this.getContext())
           .setTitle("Quiz result")
           .setMessage(
