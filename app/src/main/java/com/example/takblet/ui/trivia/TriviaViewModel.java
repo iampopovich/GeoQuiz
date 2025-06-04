@@ -9,32 +9,32 @@ import java.util.Objects;
 
 public class TriviaViewModel extends ViewModel {
 
-  private final MutableLiveData<List<TriviaQuestion>> mQuestionList =
+  private final MutableLiveData<List<TriviaQuestion>> questionList =
       new MutableLiveData<>(new ArrayList<>());
 
   public void addQuestion(TriviaQuestion question) {
-    List<TriviaQuestion> questions = Objects.requireNonNull(mQuestionList.getValue());
+    List<TriviaQuestion> questions = Objects.requireNonNull(questionList.getValue());
     questions.add(question);
-    mQuestionList.postValue(questions);
+    questionList.postValue(questions);
   }
 
   public void clearQuestions() {
-    List<TriviaQuestion> questions = Objects.requireNonNull(mQuestionList.getValue());
+    List<TriviaQuestion> questions = Objects.requireNonNull(questionList.getValue());
     questions.clear();
-    mQuestionList.postValue(questions);
+    questionList.postValue(questions);
   }
 
   public void removeQuestion(TriviaQuestion question) {
-    List<TriviaQuestion> questions = Objects.requireNonNull(mQuestionList.getValue());
+    List<TriviaQuestion> questions = Objects.requireNonNull(questionList.getValue());
     questions.remove(question);
-    mQuestionList.postValue(questions);
+    questionList.postValue(questions);
   }
 
   public LiveData<List<TriviaQuestion>> getQuestionList() {
-    return mQuestionList;
+    return questionList;
   }
 
   public void setQuestions(List<TriviaQuestion> questions) {
-    mQuestionList.setValue(questions);
+    questionList.setValue(questions);
   }
 }

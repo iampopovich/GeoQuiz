@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class QuizViewModel extends ViewModel {
-  private final List<Question> mQuestionBank =
+  private final List<Question> questionBank =
       Arrays.asList(
           new Question(R.string.question_australia, true),
           new Question(R.string.question_oceans, true),
@@ -50,71 +50,71 @@ public class QuizViewModel extends ViewModel {
           new Question(R.string.question_kilimanjaro, true));
 
   private final ArrayList<Question> availableQuestions = new ArrayList<>();
-  private final MutableLiveData<Boolean> mAnswerIsViewed = new MutableLiveData<>();
-  private final MutableLiveData<Question> mCurrentQuestion = new MutableLiveData<>();
-  private final MutableLiveData<Integer> mCorrectAnswers = new MutableLiveData<>();
-  private final MutableLiveData<Integer> mIncorrectAnswers = new MutableLiveData<>();
-  private final MutableLiveData<Integer> mCheatsUsed = new MutableLiveData<>();
+  private final MutableLiveData<Boolean> answerIsViewed = new MutableLiveData<>();
+  private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
+  private final MutableLiveData<Integer> correctAnswers = new MutableLiveData<>();
+  private final MutableLiveData<Integer> incorrectAnswers = new MutableLiveData<>();
+  private final MutableLiveData<Integer> cheatsUsed = new MutableLiveData<>();
 
   public QuizViewModel() {
-    mAnswerIsViewed.setValue(false);
-    mCorrectAnswers.setValue(0);
-    mIncorrectAnswers.setValue(0);
-    mCheatsUsed.setValue(0);
+    answerIsViewed.setValue(false);
+    correctAnswers.setValue(0);
+    incorrectAnswers.setValue(0);
+    cheatsUsed.setValue(0);
   }
 
   private final String TAG = "QuizViewModel";
 
-  public MutableLiveData<Integer> getmCorrectAnswers() {
-    return mCorrectAnswers;
+  public MutableLiveData<Integer> getCorrectAnswers() {
+    return correctAnswers;
   }
 
-  public MutableLiveData<Integer> getmIncorrectAnswers() {
-    return mIncorrectAnswers;
+  public MutableLiveData<Integer> getIncorrectAnswers() {
+    return incorrectAnswers;
   }
 
-  public MutableLiveData<Integer> getmCheatsUsed() {
-    return mCheatsUsed;
+  public MutableLiveData<Integer> getCheatsUsed() {
+    return cheatsUsed;
   }
 
   public boolean getAnswerIsViewed() {
-    return Objects.requireNonNull(mAnswerIsViewed.getValue());
+    return Objects.requireNonNull(answerIsViewed.getValue());
   }
 
   public int getCurrentIndex() {
-    return availableQuestions.indexOf(mCurrentQuestion.getValue());
+    return availableQuestions.indexOf(currentQuestion.getValue());
   }
 
   public void setAnswerIsViewed(boolean value) {
-    mAnswerIsViewed.setValue(value);
+    answerIsViewed.setValue(value);
   }
 
   public boolean getCurrentAnswer() {
-    return Objects.requireNonNull(mCurrentQuestion.getValue()).getAnswer();
+    return Objects.requireNonNull(currentQuestion.getValue()).getAnswer();
   }
 
   public int getCurrentQuestionText() {
-    return Objects.requireNonNull(mCurrentQuestion.getValue()).getTextResId();
+    return Objects.requireNonNull(currentQuestion.getValue()).getTextResId();
   }
 
   public void moveToNextQuestion() {
     if (getCurrentIndex() < availableQuestions.size() - 1) {
-      mCurrentQuestion.setValue(availableQuestions.get(getCurrentIndex() + 1));
+      currentQuestion.setValue(availableQuestions.get(getCurrentIndex() + 1));
     } else if (getCurrentIndex() == availableQuestions.size() - 1) {
-      mCurrentQuestion.setValue(availableQuestions.get(0));
+      currentQuestion.setValue(availableQuestions.get(0));
     } else return;
-    mAnswerIsViewed.setValue(false);
+    answerIsViewed.setValue(false);
   }
 
   public boolean isAnyQuestionAvailable() {
-    availableQuestions.remove(mCurrentQuestion.getValue());
+    availableQuestions.remove(currentQuestion.getValue());
     return !availableQuestions.isEmpty();
   }
 
   public void selectRandomQuestions(int limit) {
     this.availableQuestions.clear();
     this.availableQuestions.addAll(
-        mQuestionBank.stream()
+        questionBank.stream()
             .collect(
                 Collectors.collectingAndThen(
                     Collectors.toList(),
@@ -124,18 +124,18 @@ public class QuizViewModel extends ViewModel {
                     }))
             .limit(limit)
             .collect(Collectors.toList()));
-    mCurrentQuestion.setValue(availableQuestions.get(0));
+    currentQuestion.setValue(availableQuestions.get(0));
   }
 
   public void setCheatsUsed(int i) {
-    mCheatsUsed.setValue(i);
+    cheatsUsed.setValue(i);
   }
 
   public void setCorrectAnswers(int i) {
-    mCorrectAnswers.setValue(i);
+    correctAnswers.setValue(i);
   }
 
   public void setIncorrectAnswers(int i) {
-    mIncorrectAnswers.setValue(i);
+    incorrectAnswers.setValue(i);
   }
 }
